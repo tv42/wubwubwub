@@ -1,5 +1,6 @@
 """WubWubWub configuration defaults."""
 from twisted.web import static
+from twisted.application import service
 from wubwubwub import vhost
 
 # Set user/group to run under
@@ -24,3 +25,6 @@ logPath = '/var/log/wubwubwub/access.log'
 # Generate the Site factory. You will not normally
 # want to modify this line.
 site = vhost.VhostLoggingNevowSite(root, logPath=logPath)
+
+# Generate the Application.
+application = service.Application("wubwubwub")

@@ -9,6 +9,4 @@ execfile("/etc/wubwubwub/default", d)
 execfile("/etc/wubwubwub/root", d)
 execfile("/etc/wubwubwub/site", d)
 execfile("/etc/wubwubwub/application", d)
-application = d['application']
-d = {'application': application}
 execfile("/etc/wubwubwub/directories", d)
