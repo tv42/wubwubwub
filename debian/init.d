@@ -5,7 +5,6 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 pidfile=/var/run/twisted-web.pid
 rundir=/var/lib/twisted-web/
 file=/etc/twisted-web/twisted-web
-logfile=/var/log/twisted-web/twisted-web.log
 more_args=--no_save
 
 [ -r /etc/default/twisted-web ] && . /etc/default/twisted-web
@@ -21,7 +20,7 @@ case "$1" in
         echo -n "Starting twisted-web: twistd"
         start-stop-daemon --start --quiet --exec /usr/bin/twistd2.3 --  \
                           --pidfile=$pidfile --rundir=$rundir --python=$file\
-                          --logfile=$logfile $more_args
+                          --syslog --prefix=twisted-web $more_args
         echo "."	
     ;;
 

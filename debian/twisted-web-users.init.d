@@ -4,7 +4,6 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 pidfile=/var/run/twisted-web-users.pid
 rundir=/var/lib/twisted-web/
 file=/etc/twisted-web/twisted-web-users
-logfile=/var/log/twisted-web/twisted-web-users.log
 more_args=--no_save
 
 [ -r /etc/default/twisted-web-users ] && . /etc/default/twisted-web-users
@@ -19,7 +18,7 @@ case "$1" in
         echo -n "Starting twisted-web-users: process-manager"
         start-stop-daemon --start --quiet --exec /usr/bin/twistd2.3 --  \
                           --pidfile=$pidfile --rundir=$rundir --python=$file\
-                          --logfile=$logfile --quiet $more_args
+                          --syslog --prefix=twisted-web-users --quiet $more_args
         echo "."	
     ;;
 
