@@ -3,9 +3,17 @@ twisted-web (0.24) unstable; urgency=low
   * The "pacify lintian" release
     + Change Upstream Author thing to convince it I'm not using a template
     + Make sure changelog is compressed
-    + Add an unneccessary dependency on python2.2 
+    + Add an unneccessary dependency on python2.2
+    + Empty out debian/conffiles, debhelper registers /etc files itself
+  * Some warnings kept:
+    + non-standard-dir-perm: it needs to be 770: the logfiles should not
+      be readable by regular users, and need to be writable by www-data.
+    + debconf usage is non-standard for a reason: there's a point to asking
+      questions only if there's a running web server, which can't reliably
+      be detected at config time.
+  * Uploading to Debian. (Closes: #189477)
 
- -- Moshe Zadka <moshez@debian.org>  Fri, 25 Apr 2003 08:30:54 -0500
+ -- Moshe Zadka <moshez@debian.org>  Fri, 25 Apr 2003 13:39:30 +0000
 
 twisted-web (0.23) unstable; urgency=low
 
