@@ -5,10 +5,11 @@
 # the comments.
 #
 from twisted.web import script, static, twcgi
+from wubwubwub import config
 
 vhostName, vhostRoot= "example.com", "/var/www/example"
 resource = static.File('/var/www/'+vhostRoot)
-root.addHost(vhostName, vhostResource)
+config.root.addHost(vhostName, resource)
 
 # The default processors in Twisted, by file extension.
 # These make some file extensions not being sent to the user,
@@ -29,7 +30,7 @@ resource.processors = {
 # resource.defaultType = 'text/html'
 
 # Add more mime-types
-resource.contentTypes = root.contentTypes.copy()
+resource.contentTypes = config.default.contentTypes.copy()
 # resource.contentTypes['extension'] = 'mime/type'
 
 # Uncomment this so /path/to/foo can serve /path/to/foo.bar

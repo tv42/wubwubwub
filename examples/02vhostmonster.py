@@ -8,5 +8,6 @@
 # http://internal-host/vhost/http/example.com/foo/bar/baz.html
 #
 from twisted.web import vhost
+from wubwubwub import config
 
-default.putChild('vhost', vhost.VHostMonsterResource())
+config.default.putChild('vhost', vhost.VHostMonsterResource())

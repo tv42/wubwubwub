@@ -2,9 +2,10 @@
 # 
 # To use this file, cp 01processrpy.py /etc/wubwubwub/local.d
 #
-from twisted.web import script, static
+from twisted.web import script
+from wubwubwub import config
 
-default.processors['.rpy'] = script.ResourceScript
+config.default.processors['.rpy'] = script.ResourceScript
 
 # To make .rpy processing transparent:
-# default.ignoreExt('rpy')
+# config.default.ignoreExt('rpy')
