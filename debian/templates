@@ -9,4 +9,4 @@ _Description: Cannot bind to port 80
  "invoke-rc.d wubwubwub" to start the server manually.
  .
  If you wish to run Wubwubwub on some other port and reverse-proxy a
- specific virtual host to it, please see the rptwisted(8) program.
+ specific virtual host to it, please see the wubwubwub-rproxy(8) program.

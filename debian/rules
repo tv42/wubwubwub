@@ -25,7 +25,7 @@ install-stamp: build-stamp
 	dh_clean -k
 	dh_installdirs
 	dh_installdebconf
-	dh_installman man/rptwisted.8 man/twconfcheck.8
+	dh_installman man/wubwubwub-rproxy.8 man/twconfcheck.8
 	install -m 644 config/ports config/user config/wubwubwub \
 	               config/default config/root config/site \
 	               config/application config/directories \
@@ -39,7 +39,7 @@ install-stamp: build-stamp
 	install -m 644 debian/changelog ${DIR}/usr/share/doc/wubwubwub/
 	gzip -9 ${DIR}/usr/share/doc/wubwubwub/changelog
 	chmod 770 ${DIR}/var/log/wubwubwub
-	install -m 755 bin/rptwisted bin/twconfcheck ${DIR}/usr/sbin/
+	install -m 755 bin/wubwubwub-rproxy bin/twconfcheck ${DIR}/usr/sbin/
 	touch ${DIR}/usr/share/wubwubwub/package-installed
 	touch install-stamp
 

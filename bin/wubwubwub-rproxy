@@ -17,13 +17,13 @@ class Options(usage.Options):
                ]
 
     def opt_version(self):
-        print "rptwisted: version 0.25"
+        print "wubwubwub-rproxy: version 0.25"
 	sys.exit()
 
 
 header='''\
 ####
-#### Automatically added by rptwisted
+#### Automatically added by wubwubwub-rproxy
 ####
 '''
 

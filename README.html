@@ -158,20 +158,20 @@ changing the configuration of the other server. After undisabling Wubwubwub,
 run the command <code>invoke-rc.d wubwubwub start</code> to start the server
 manually.</p>
 
-<p><code>rptwisted</code> exists to run Twisted on an out-of-the-way port and
+<p><code>wubwubwub-rproxy</code> exists to run Twisted on an out-of-the-way port and
 prepare it
 to be a reverse proxy.  It will reconfigure Wubwubwub to run on another
 port, and will also, optionally, drop a file in Apache2's configuration
 directory to reverse proxy a named virtual host to the Wubwubwub server.</p>
 
-<p>Running rptwisted without Apache 2 support:</p>
+<p>Running wubwubwub-rproxy without Apache 2 support:</p>
 <pre>
-rptwisted --port=8538
+wubwubwub-rproxy --port=8538
 </pre>
 
-<p>Running rptwisted with Apache 2 support:</p>
+<p>Running wubwubwub-rproxy with Apache 2 support:</p>
 <pre>
-rptwisted --port=8538 --vhost=twisted.example.com --apache-port=80
+wubwubwub-rproxy --port=8538 --vhost=twisted.example.com --apache-port=80
 </pre>
 
 <p>If you don't use the option to generate the Apache2 virtual host configuration,
