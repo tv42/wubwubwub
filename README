@@ -90,12 +90,14 @@ Dynamic User Pages
 In order to let users' home dirs be able to have dynamic pages, enable
 twisted-web-users by removing the "exit 0" from /etc/default/twisted-web-users.
 A user who wants dynamic pages should put in his $HOME/.twisted-command
-a command which accepts "--pidfile=<file>" and starts a so-called 
-"personal server". The easiest way to do this is to use the mktap web
-command with the --personal argument, and put in $HOME/.twisted-command
+a command "personal server". It is very important that this command will
+*not* daemonize, but serve in the same process it started in. This allows
+the twisted-web-users process to monitor it and restart it if it dies.
+The easiest way to do this is to use the mktap web command with the 
+--personal argument, and put in $HOME/.twisted-command
 something like
 '''
-twistd2.2 -f ~/web.tap $1
+twistd2.2 -f ~/web.tap -n
 '''
 
 This init script tries to guess users based on a number of heuristics.
