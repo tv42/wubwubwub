@@ -9,7 +9,10 @@ else:
 if os.path.exists("/etc/twisted-web/twisted-web-users.deny"):
     denied = open("/etc/twisted-web/twisted-web-users.deny").read().split()
     for user in denied:
-        users.remove(user)
+        try:
+            users.remove(user)
+        except ValueError:
+            pass
 
 commands = [(entry[0], ['/bin/sh', '-c', 'cd %s;./.twisted-command' % entry[5]],
             entry[2], entry[3]) for entry in map(pwd.getpwnam, users)
@@ -21,4 +24,4 @@ application = app.Application("twisted-web-users", 0, 0)
 processManager = procman.ProcessManager("personal-servers", application)
 
 for command in commands:
-    processManager.addProcess(*command) 
+    processManager.addProcess(*command)
