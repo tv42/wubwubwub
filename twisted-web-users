@@ -11,8 +11,9 @@ if os.path.exists("/etc/twisted-web/twisted-web-users.deny"):
     for user in denied:
         users.remove(user)
 
-commands = [entry[0], ['/bin/sh', '-c', 'cd %s;./twisted-command' % entry[5]],
-            entry[2], entry[3] for entry in map(pwd.getpwnam, users)]
+commands = [(entry[0], ['/bin/sh', '-c', 'cd %s;./twisted-command' % entry[5]],
+            entry[2], entry[3]) for entry in map(pwd.getpwnam, users)
+                                    if entry[2]>=1000 and entry[0]!='nobody']
 
 application = app.Application("twisted-web-users", 0, 0)
 
