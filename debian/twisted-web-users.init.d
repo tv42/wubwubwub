@@ -22,7 +22,7 @@ case "$1" in
     ;;
 
     stop)
-        echo -n "Stopping twisted-web: twistd"
+        echo -n "Stopping twisted-web-users: "
         for user in $users;
             do home=`getent passwd $user|awk -F: '{print $6}'`
             command=$home/.twistd-command
