@@ -30,6 +30,8 @@ install-stamp: build-stamp
 	install -m 644 debian/copyright README ${DIR}/usr/share/doc/twisted-web/
 	install -m 644 examples/*.py ${DIR}/usr/share/doc/twisted-web/examples/
 	chgrp www-data ${DIR}/var/log/twisted-web
+        install -m 644 debian/changelog ${DIR}/usr/share/doc/twisted-web/
+        gzip -9 ${DIR}/usr/share/doc/twisted-web/changelog
 	chmod 770 ${DIR}/var/log/twisted-web
 	install -m 755 rptwisted ${DIR}/usr/sbin/
 	touch ${DIR}/usr/share/twisted-web/package-installed
@@ -41,7 +43,6 @@ binary-indep: build install
 	dh_testdir
 	dh_testroot
 	dh_compress
-	dh_installchangelogs
 	dh_installdeb
 	dh_gencontrol
 	dh_md5sums
