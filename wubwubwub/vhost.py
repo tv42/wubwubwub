@@ -2,6 +2,8 @@ from twisted.protocols import http
 from nevow import appserver
 
 class VhostLoggingNevowSite(appserver.NevowSite):
+    format = ('%(host)r %(ip)s - - %(datetime)s "%(req)s" '
+              +'%(code)d %(sent)s "%(referer)s" "%(useragent)s"\n')
     def log(self, request):
         """
         Log a request's result to the logfile.
@@ -21,5 +23,4 @@ class VhostLoggingNevowSite(appserver.NevowSite):
             'referer': request.getHeader("referer") or "-",
             'header': request.getHeader("user-agent") or "-",
             }
-        line = '%(host)r %(ip)s - - %(datetime)s "%(req)s" %(code)d %(sent)s "%(referer)s" "%(useragent)s"\n' % data
-        self.logFile.write(line)
+        self.logFile.write(format % data)
