@@ -1,8 +1,13 @@
-wubwubwub (0.26.3) unstable; urgency=low
+wubwubwub (0.0.1) unstable; urgency=low
 
-  * TODO
+  * Rename to wubwubwub, reset version number.
+    - Rename twconfcheck to wubwubwub-confcheck.
+    - Rename rptwisted to wubwubwub-rproxy.
+  * Use syslog.
+  * Switch to CDBS.
+  * Fix README typo.
 
- -- Tommi Virtanen <tv@debian.org>  Thu, 13 Jan 2005 02:43:54 +0200
+ -- Tommi Virtanen <tv@debian.org>  Fri, 14 Jan 2005 00:12:02 +0200
 
 twisted-web (0.26.2) unstable; urgency=low
 
