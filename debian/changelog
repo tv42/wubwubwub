@@ -1,3 +1,13 @@
+wubwubwub (0.1) unstable; urgency=low
+
+  * Great config reorganization. Instead of assuming things are in default
+    namespace, and mutating/overwriting them, say "from wubwubwub import
+    config" and set things there. WARNING: requires changes to all local.d
+    and package.d snippets.
+  * Isolate vhost logic to wubwubwub.vhost, cleanup.
+
+ -- Tommi Virtanen <tv@debian.org>  Wed, 23 Feb 2005 13:50:45 +0200
+
 wubwubwub (0.0.2) unstable; urgency=low
 
   * Remove duplicated bits from maintainer scripts, let debhelper handle them.
