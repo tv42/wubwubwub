@@ -4,131 +4,17 @@
 # files to /etc/twisted-web/local.d
 # Refer to README for more details.
 # 
-from twisted.web import script, static, server, distrib, twcgi, vhost, rewrite
-from twisted.internet import app
-import pwd, grp, glob
-import glob
-
-# The root of the HTTP hierarchy
-default = static.File('/var/www')
-
-# The default processors in Twisted, by file extension.
-# These make some file extensions not being sent to the user,
-# but rather evaluated in various ways.
-#
-# Do *NOT* turn any of this on if untrusted users can put files
-# in the document hierarchy.
-default.processors = {
-#    '.cgi': twcgi.CGIScript,
-#    '.php3': twcgi.PHP3Script,
-#    '.php': twcgi.PHPScript,
-#    '.epy': script.PythonScript,
-#    '.rpy': script.ResourceScript,
-#    '.trp': trp.ResourceUnpickler,
-}
-
-# Comment this if you don't want to support a users/ directory
-# http://host/users/fred/foo/bar.html will map to
-# ~fred/public_html/foo/bar.html
-#
-default.putChild('users', distrib.UserDirectory())
-
-# Comment this if you don't want /cgi-bin/ to execute CGI programs
-default.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
-default.putChild('rpy-lib', script.ResourceScriptDirectory('/usr/lib/rpy-lib'))
-
-# Comment this if you don't want to serve the Debian /usr/share/doc
-# as part of your server
-default.putChild('doc', static.File('/usr/share/doc'))
-
-# Change this if you want default mime-type to be different:
-# default.defaultType = 'text/html'
-
-# Add more mime-types
-default.contentTypes = default.contentTypes.copy()
-# default.contentTypes['extension'] = 'mime/type'
-
-# Ignore all extensions -- Allow /foo/bar.ext to be served for /foo/bar
-# Uncomment to enable
-# default.ignoreExt('*')
-
-# Ignore a partial list of extensions
-# default.ignoreExt('html') # Allow /foo.html to be served for /foo
-# default.ignoreExt('jpg')
-# Useful to make ResourceScripts which look like directories.
-# default.ignoreExt('rpy') 
-
-
-# Add more indexes
-# http://host/foo/ will serve index.html, index.rpy or index.php,
-# the first which exists.
-# If none exist, it will generate a directory listing.
-#
-default.indexNames = [
-    'index.html',
-#     'index.rpy',
-#     'index.php',
-]
-
-# set logfile name.
-# This is the *Apache compatible* log file, not the twisted-style logfile.
-# Leaving this as None will have no Apache compatible log file. Apache
-# compatible logfiles are useful because there are quite a few programs
-# which analyse them and display statistics. 
-logPath = None
-
-# Allow the requestor to tell us which host we are
-# default.putChild('vhost', vhost.VHostMonsterResource())
-
-# Add a rule to rewrite /~foo/bar.html to /usrs/foo/bar.html
-# so that the classical user URLs will work.
-default_root = rewrite.RewriterResource(default, rewrite.tildeToUsers)
-
-# Make sure it is easy to add new virtual hosts:
-root = vhost.NameVirtualHost()
-root.default = default_root
-
-# To add virtual hosts
-#
-# exampleRoot = static.File('/var/vhosts/example')
-# root.addHost('example.com', exampleRoot)
-
-
-# Generate the Site factory. You will not normally
-# want to modify this line.
-site = server.Site(root, logPath=logPath)
-
-# Set user/group to run under
-# Usually, it runs under the www-data user and group.
-uid = pwd.getpwnam('www-data')[2]
-gid = grp.getgrnam('www-data')[2]
-
-
-# Generate the Application. You will not normally
-# want to modify this line.
-application = app.Application("web", uid=uid, gid=gid)
-
-# Listen on all ports specified:
-ports = map(int, open("/etc/twisted-web/ports").read().split())
-ssl_ports = map(int, open("/etc/twisted-web/ssl-ports").read().split())
-
-for port in ports:
-    application.listenTCP(port, site)
-for port in ssl_ports:
-    application.listenSSL(port, site)
-
-# If you do not want to modify this file directly, most modifications
-# can be done via putting a Python file in /etc/twisted-web/local.d
-# This file will have access to root, default, site and application and
-# can call any method or change any attribute on them.
-#
-# If you want to change the root itself, "root=something" will not
-# have the desired effect. Instead, use site.resource=something
-#
-dictionary = {'root': root, 'site': site, 'application': application,
-              'default': default}
-for dir in ('package.d', 'local.d'):
-    files = glob.glob("/etc/twisted-web/%(dir)s/*.py" % dir)
-    files.sort()
-    for file in files:
-        execfile(file, dictionary)
+d = {}
+execfile("/etc/twisted-web/default", d)
+default = d['default']
+d = {'default': default}
+execfile("/etc/twisted-web/root", d)
+root = d['root']
+d = {'default': default, 'root': root}
+execfile("/etc/twisted-web/site", d)
+site = d['site']
+d = {'default': default, 'root': root, 'site': site}
+execfile("/etc/twisted-web/application", d)
+application = d['application']
+d = {'default': default, 'root': root, 'site': site, 'application': application}
+execfile("/etc/twisted-web/directories", d)
