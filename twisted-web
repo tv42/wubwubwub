@@ -1,8 +1,6 @@
 # For more information and general comments on editing this file
 # please refer to README.Debian
 # 
-sys.path.append("/usr/share/twisted-web/packages/")
-
 from twisted.web import script, static, server, distrib, twcgi, vhost
 from twisted.internet import app
 import pwd, grp, glob
