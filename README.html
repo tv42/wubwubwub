@@ -1,0 +1,245 @@
+<html><head><title>Twisted-Web Debian Package</title></head><body>
+
+
+<h1>Twisted-Web Debian Package</h1>
+
+<p>Our Motto: Making Twisted.Web look like Apache since 2002</p>
+
+<p>This file documents the specific configuration framework used for the
+Debian package of Twisted.Web. For non-trivial options which are not
+covered here, be sure to read
+<a href="/usr/share/doc/twisted-doc/howto/using-twistedweb.xhtml">
+/usr/share/doc/twisted-doc/howto/using-twistedweb.xhtml</a>
+(in the <code>twisted-doc</code> package).</p>
+
+<h2>Explanation of Default Configuration</h2>
+
+<p>The default configuration's goals are the following, in this order</p>
+
+<dl>
+<dt>Maximum safety</dt>
+<dd>Always err on side of locking down too much, and let the
+  user open up options of dubious safety.</dd>
+<dt>Maximum familiarity</dt>
+<dd>If the choices don't present any inherent danger,
+  configure to be as similar to the standard web server configuration. The
+  Apache configuration being the most thorough is the reason for the motto.</dd>
+<dt>Maximum flexibility</dt>
+<dd>As long as it is not unsafe nor too surprising, try
+  to have a configuration which lends as much power to the end user.</dd>
+</dl>
+
+<p>The user it runs as (after binding to ports) is <code>www-data</code>, and
+the group is also <code>www-data</code>.</p>
+
+<p>By default, the configuration is to handle all hostnames to be the same --
+all pointing to <code>/var/www</code>. No <q>processors</q> are enabled, so it
+is possible to allow untrusted parties to put files in <code>/var/www</code>
+without giving them the ability to run code as <code>www-data</code>.</p>
+
+<p><code>/doc</code> is pointed to <code>/usr/share/doc/</code>, so all the
+Debian documentation is
+served by default (which means, for example, <code>dhelp</code> works).</p>
+
+<code>/cgi-bin</code> is pointed to <code>/usr/lib/cgi-bin/</code>, so
+third-party packages CGI
+(<code>mailman</code>, <code>man2html</code>) are likewise served.</p>
+
+<p><code>/users/&lt;name&gt;/</code> points to the user's
+<code>public_html</code> directory.</p>
+
+<p><code>/users/<name>.twistd/</code> will relay requests to the user
+personal server, if it exists.</p>
+
+<p><code>/~name/</code>, or <code>/~name.twistd/</code>, function the same as
+<code>/users/name/</code> or <code>/users/name.twistd/</code>.</p>
+
+<p>Any documents with unrecognised extension are served as
+<code>text/html</code>.</p>
+
+<h2>Modifications and Smooth Upgrades</h2>
+
+<p>In order to avoid modifying the configuration files so maintainer updates
+can happen smoothly, please put local configuration files in
+<code>/etc/twisted-web/local.d</code>.
+All <code>.py</code> files in this directory are evaluated according to
+lexical order.
+It is recommended files will begin with two digits to set the order.
+All example drop-in configuration files follow this convention.</p>
+
+<p>Drop-in configuration files are evaluated inside a namespace consisting
+of</p>
+
+<dl>
+<dt><code>root</code></dt>
+<dd>the root resource, usually a <code>NameVirtualHost</code></dd>
+<dt><code>default</code></dt>
+<dd>the default <code>File</code> root for names which are not virtual
+    hosts</dd>
+<dt><code>site</code></dt>
+<dd><code>web.server.Site</code>, the factory</dd>
+<dt><code>application</code></dt>
+<dd>a <code>twisted.internet.app.Application</code></dd>
+<dd>
+
+<p>Examples of such configuration scripts are in
+<code>/usr/share/doc/twisted-doc/examples</code></p>
+
+<div class="note">
+Do <em>not</em> copy all scripts blindly. Some are positively dangerous,
+and some need to be tweaked before used. Please read the comments in
+each example before using it.</p>
+</div>
+
+<p>Note that the examples use the convention of prefixing every script name
+by two decimal digits. This convention, together with the fact that
+the scripts are read in lexicographical order, allows the order of
+evaluation to be easily seen (and modified, if so desired).</p>
+
+<h2>Ports</h2>
+
+<p>Since ports are often needed to be modified by programs, the port list
+is kept in <code>/etc/twisted-web/ports</code> for HTTP ports and
+<code>/etc/twisted-web/ssl-ports</code> for ports served via HTTPS.
+The code which is
+responsible for listening on them is in
+<code>/etc/twisted-web/application</code>, so
+it is possible to disable it. Note, however, that programs such as
+<code>rptwisted</code>
+(described below) depend on this configuration, and may not work effectively
+if it is disabled.</p>
+
+<p>Note that if you enable any of the <code>ssl-ports</code>, you should install
+<code>python2.2-pyopenssl</code> for them to work correctly.</p>
+
+<h2>Conffiles</h2>
+
+<p>In case you do want to modify the package's conffiles, note that they
+have been paritioned into logical pieces.
+<code>/etc/twisted-web/twisted-web</code>
+is the master configuration, which loads all others. It should rarely,
+if ever, be modified.</p>
+
+<p>The configuration loads the following files:</p>
+
+<dl>
+<dt><code>/etc/twisted-web/default</code></dt>
+<dd>create the default web site</dd>
+<dt><code>/etc/twisted-web/root</code></dt>
+<dd>create the root site (as a virtual hosted site)</dd>
+<dt><code>/etc/twisted-web/site</code></dt>
+<dd>create the Site factory</dd>
+<dt><code>/etc/twisted-web/application</code></dt>
+<dd>create the application object, listen on ports</dd>
+<dt><code>/etc/twisted-web/directories</code></dt>
+<dd>read the scripts inside <code>/etc/twisted-web/package.d</code>
+and <code>/etc/twisted-web/local.d</code></dd>
+</dl>
+
+<h2>Dynamic User Pages</h2>
+
+<p>A user who wants dynamic pages should somehow make sure a personal server is
+up and running. The easiest way to do this is to use the 
+<code class="shell">mktap web</code> command
+with the <code>--personal</code> argument, and then start the server with</p>
+
+<pre class="shell">
+twistd2.2 -f ~/web.tap
+</pre>
+
+<p>Starting servers can be done with <code>crontab</code> and a line like:</p>
+
+<pre>
+@reboot cd $HOME;twistd2.2 -f ~/web.tap
+</pre>
+
+<h2>Reverse Proxy Configuration</h2>
+
+<p>If some other program is running on port 80 Twisted-Web will be disabled
+until
+you change <code>/etc/twisted-web/disable</code> to be empty. You should do
+this after
+changing the configuration of Twisted-Web to listen on some other port, or
+changing the configuration of the other server. After undisabling Twisted-Web,
+run the command <code>invoke-rc.d twisted-web start</code> to start the server
+manually.</p>
+
+<p><code>rptwisted</code> exists to run Twisted on an out-of-the-way port and
+prepare it
+to be a reverse proxy.  It will reconfigure Twisted-Web to run on another
+port, and will also, optionally, drop a file in Apache2's configuration
+directory to reverse proxy a named virtual host to the Twisted-Web server./p>
+
+<p>Running rptwisted without Apache 2 support:/p>
+<pre>
+rptwisted --port=8538
+</pre>
+
+<p>Running rptwisted with Apache 2 support:/p>
+<pre>
+rptwisted --port=8538 --vhost=twisted.example.com --apache-port=80
+</pre>
+
+<p>If you don't use the option to generate the Apache2 virtual host configuration,
+or if you want to add more virtual host configurations, here is the template
+for a file to drop in <code>/etc/apache2/sites-available</code>:<p>
+
+<pre>
+&lt;VirtualHost *&gt;
+ProxyPass / http://localhost:8538/vhost/http/example.com:80/
+ServerName example.com
+&lt;/VirtualHost&gt;
+</pre>
+
+<p>Remember to symlink it to sites-enabled, and restart Apache2!</p>
+
+
+<h2>Packages Containing Resources</h2>
+
+<p><code>/usr/lib/rpy-lib<code> is served as a
+<code>ResourceScriptDirectory</code> -- anything in
+it is assumed to be a <code>ResourceScript</code>, and will be served as such.
+If your package has a <code>Resource</code> it wants to serve,
+<code>Depend:</code> on <code>twisted-web</code>,
+and drop your <code>ResourceScript</code> (which does *not* have to be named
+<code>.rpy</code>)
+in <code>/usr/lib/rpy-lib</code>. In particular if your package wants to serve
+a portion
+of the web site, perhaps as a different user, use
+<code>ResourcePublisher</code> to
+listen on a socket somewhere on <code>/var/run</code>, and have a
+<code>ResourceSubscriber</code>
+in a <code>ResourceScript</code> which is then dropped in
+<code>/usr/lib/rpy-lib</code>. It is
+possible to cache the <code>ResourceSubscriber</code> in the registry
+or via the <code>cache()</code> function in <code>ResourceScript</code>s.
+For more
+information about writing resources, see the <code>using-twistedweb.xhtml</code>
+document in <code>twisted-doc</code>. Note that starting and stopping your
+server is still your responsibility.</p>
+
+
+<h2>Packages Wanting to Modify the Configuration</h2>
+
+<p><code>/etc/twisted-web/package.d</code> is designed for packages to drop
+in their
+configurations. For example, a package installing itself in a non-standard
+location may use this to add its directory to <code>sys.path</code>.</p>
+
+<h2>Purging Twisted-Web</h2>
+
+<p>Note that files in <code>/etc/twisted-web/local.d</code> are
+<em>not</em> deleted as part
+of the purge. These file are the system administrator's creations.
+If you want to get rid of them, run
+<code class="shell">rm -f /etc/twisted-web/local.d/*</code>.
+
+<h2>Checking Configuration</h2>
+
+<p>When the configuration changes, it is highly recommended to run
+<code>twconfcheck</code>. This program, which can be run as a regular user,
+will execute the configuration and check the application object
+for simple mistakes. This will increase signifcantly that a
+<code>invoke-rc.d twisted-web restart<?code> will succeed.</p>
+
+</body></html>
