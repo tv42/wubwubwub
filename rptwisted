@@ -76,6 +76,7 @@ def main():
         # ????
         # What should I write to
         # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
+    open('/etc/twisted-web/disabled', 'w').close()
     os.system('invoke-rc.d twisted-web restart')
     if opt['apache']:
         os.system('invoke-rc.d apache2 reload')
