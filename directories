@@ -1,3 +1,4 @@
+import glob
 
 # If you do not want to modify this file directly, most modifications
 # can be done via putting a Python file in /etc/twisted-web/local.d

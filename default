@@ -15,7 +15,7 @@ default.processors = {
 #    '.php': twcgi.PHPScript,
 #    '.epy': script.PythonScript,
 #    '.rpy': script.ResourceScript,
-#    '.trp': trp.ResourceUnpickler,
+#    '.trp': trp.ResourceUnpickler, # Add 'trp' to import line at top
 }
 
 # Comment this if you don't want to support a users/ directory
