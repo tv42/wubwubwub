@@ -11,7 +11,7 @@ import glob
 dictionary = {'root': root, 'site': site, 'application': application,
               'default': default}
 for dir in ('package.d', 'local.d'):
-    files = glob.glob("/etc/twisted-web/%(dir)s/*.py" % dir)
+    files = glob.glob("/etc/twisted-web/%s/*.py" % dir)
     files.sort()
     for file in files:
         execfile(file, dictionary)
