@@ -127,8 +127,8 @@ for port in ssl_ports:
 #
 dictionary = {'root': root, 'site': site, 'application': application,
               'default': default}
-files = (glob.glob("/etc/twisted-web/local.d/*.py")
-        +glob.glob("/etc/twisted-web/package.d/*.py"))
-files.sort()
-for file in files:
-    execfile(file, dictionary)
+for dir in ('package.d', 'local.d'):
+    files = glob.glob("/etc/twisted-web/%(dir)s/*.py" % dir)
+    files.sort()
+    for file in files:
+        execfile(file, dictionary)
