@@ -9,7 +9,7 @@ Package: twisted-web
 Architecture: all
 Depends: python2.2-twisted, debconf
 Provides: httpd
-Suggests: python2.2-pyopenssl
+Suggests: python2.2-pyopenssl, twisted-doc
 Description: Twisted Web Server
  The necessary configuration files and harness to use the Twisted asynchronous
  network framework to serve HTTP. Supports named virtual hosting, CGI
