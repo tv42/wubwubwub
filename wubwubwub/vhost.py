@@ -10,14 +10,16 @@ class VhostLoggingNevowSite(appserver.NevowSite):
         logFile = getattr(self, 'logFile', None)
         if logFile is None:
             return
-        line = '%r %s - - %s "%s" %d %s "%s" "%s"\n' % (
-            request.getHeader('host'),
-            request.getClientIP(),
-            # request.getUser() or "-", # the remote user is almost never important
-            http._logDateTime,
-            '%s %s %s' % (request.method, request.uri, request.clientproto),
-            request.code,
-            request.sentLength or "-",
-            request.getHeader("referer") or "-",
-            request.getHeader("user-agent") or "-")
+        data = {
+            'host': request.getHeader('host'),
+            'ip': request.getClientIP(),
+            #'user': request.getUser() or "-", # the remote user is almost never important
+            'datetime': http._logDateTime,
+            'req': '%s %s %s' % (request.method, request.uri, request.clientproto),
+            'code': request.code,
+            'sent': request.sentLength or "-",
+            'referer': request.getHeader("referer") or "-",
+            'header': request.getHeader("user-agent") or "-",
+            }
+        line = '%(host)r %(ip)s - - %(datetime)s "%(req)s" %(code)d %(sent)s "%(referer)s" "%(useragent)s"\n' % data
         self.logFile.write(line)
