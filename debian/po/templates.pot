@@ -1,0 +1,51 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-07 14:10+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid "Cannot bind to port 80"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid ""
+"Some other server is bound to TCP port 80, the port for webservers. Twisted-"
+"Web will be disabled until you change /etc/twisted-web/disable to be empty. "
+"You should do this after changing the configuration of Twisted-Web to listen "
+"on some other port, or changing the configuration of the other server. After "
+"undisabling Twisted-Web, run the command \"invoke-rc.d twisted-web\" to "
+"start the server manually."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid ""
+"If you wish to run Twisted-Web on some other port and reverse-proxy a "
+"specific virtual host to it, please see the rptwisted(8) program."
+msgstr ""

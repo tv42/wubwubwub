@@ -1,0 +1,23 @@
+from twisted.application import service
+from twisted.runner import procmon
+import os, pwd, sets
+
+def readUsers(fname, default=()):
+    if os.path.exists(fname):
+        default = open(fname).read().split()
+    return sets.Set(default)
+
+allUsers = [entry[0] for entry in pwd.getpwall()]
+users = (readUsers("/etc/twisted-web/twisted-web-users.allow", allUsers) - 
+         readUsers("/etc/twisted-web/twisted-web-users.deny"))
+
+processMonitor = procmon.ProcessMonitor()
+for user in users:
+    _, uid, gid, _, homeDir = pwd.getpwnam(users)
+    if uid<100 or uid==(2<<16)-2: #nobody
+        continue
+    command = ['/bin/sh', '-c', 'cd %s;./.twisted-command' % homeDir]
+    processMonitor.addProcess(user, command, uid, gid)
+
+application = service.Application("twisted-web-users", 0, 0)
+processMonitor.setServiceParent(application)

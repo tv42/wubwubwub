@@ -13,9 +13,7 @@ default.processors = {
 #    '.cgi': twcgi.CGIScript,
 #    '.php3': twcgi.PHP3Script,
 #    '.php': twcgi.PHPScript,
-#    '.epy': script.PythonScript,
 #    '.rpy': script.ResourceScript,
-#    '.trp': trp.ResourceUnpickler, # Add 'trp' to import line at top
 }
 
 # Comment this if you don't want to support a users/ directory
@@ -30,9 +28,9 @@ default.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
 # Comment this out if you don't want /rpy-lib/ to be executed
 default.putChild('rpy-lib', script.ResourceScriptDirectory('/usr/lib/rpy-lib'))
 
-# Comment this out if you don't want to serve the Debian /usr/share/doc
-# as part of your server
-default.putChild('doc', static.File('/usr/share/doc'))
+# Uncomment this if you want to serve the Debian /usr/share/doc
+# as part of your server (this could be dangerous!)
+#default.putChild('doc', static.File('/usr/share/doc'))
 
 # Change this if you want default mime-type to be different:
 # default.defaultType = 'text/html'

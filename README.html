@@ -79,7 +79,7 @@ of</p>
 <dt><code>site</code></dt>
 <dd><code>web.server.Site</code>, the factory</dd>
 <dt><code>application</code></dt>
-<dd>a <code>twisted.internet.app.Application</code></dd>
+<dd>a <code>twisted.service.Application</code></dd>
 </dl>
 
 <p>Examples of such configuration scripts are in
@@ -99,17 +99,11 @@ evaluation to be easily seen (and modified, if so desired).</p>
 <h2>Ports</h2>
 
 <p>Since ports are often needed to be modified by programs, the port list
-is kept in <code>/etc/twisted-web/ports</code> for HTTP ports and
-<code>/etc/twisted-web/ssl-ports</code> for ports served via HTTPS.
-The code which is
-responsible for listening on them is in
-<code>/etc/twisted-web/application</code>, so
-it is possible to disable it. Note, however, that programs such as
-<code>rptwisted</code>
-(described below) depend on this configuration, and may not work effectively
-if it is disabled.</p>
+is kept in <code>/etc/twisted-web/ports</code>. These are strports-compatible ports:
+"8080", "tcp:8080:interface=127.0.0.1" and "ssl:8080" are all valid
+options, as well as more esoteric options like "unix:/foo:listen=100".</p>
 
-<p>Note that if you enable any of the <code>ssl-ports</code>, you should install
+<p>Note that if you have any <code>ssl ports</code>, you should install
 <code>python2.3-pyopenssl</code> for them to work correctly.</p>
 
 <h2>Conffiles</h2>
@@ -211,8 +205,7 @@ listen on a socket somewhere on <code>/var/run</code>, and have a
 <code>ResourceSubscriber</code>
 in a <code>ResourceScript</code> which is then dropped in
 <code>/usr/lib/rpy-lib</code>. It is
-possible to cache the <code>ResourceSubscriber</code> in the registry
-or via the <code>cache()</code> function in <code>ResourceScript</code>s.
+possible to cache the <code>ResourceSubscriber</code> in the registry.
 For more
 information about writing resources, see the <code>using-twistedweb.xhtml</code>
 document in <code>twisted-doc</code>. Note that starting and stopping your

@@ -1,3 +1,11 @@
+twisted-web (0.26.2) unstable; urgency=low
+
+  * Merged in 0.26.0.moshezforkedhimself, which is the 0.26 moshez
+    released almost two years before his other 0.26 release. DUH!
+  * Packaging cleanup.
+
+ -- Tommi Virtanen <tv@debian.org>  Thu, 13 Jan 2005 02:02:52 +0200
+
 twisted-web (0.26.1) unstable; urgency=low
 
   * Use python 2.3.
@@ -5,6 +13,13 @@ twisted-web (0.26.1) unstable; urgency=low
   * Changed log format to include virtual host name.
 
  -- Tommi Virtanen <tv@debian.org>  Thu, 13 Jan 2005 00:56:32 +0200
+
+twisted-web (0.26.0.moshezforkedhimself) unstable; urgency=low
+
+  * Updated to new way of Twisted
+  * Move doc/ to a comment, don't enable by default
+
+ -- Moshe Zadka <moshez@debian.org>  Fri,  7 Jan 2005 13:54:15 +0200
 
 twisted-web (0.26) unstable; urgency=low
 
