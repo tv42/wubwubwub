@@ -24,11 +24,13 @@ default.processors = {
 #
 default.putChild('users', distrib.UserDirectory())
 
-# Comment this if you don't want /cgi-bin/ to execute CGI programs
+# Comment this out if you don't want /cgi-bin/ to execute CGI programs
 default.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
+
+# Comment this out if you don't want /rpy-lib/ to be executed
 default.putChild('rpy-lib', script.ResourceScriptDirectory('/usr/lib/rpy-lib'))
 
-# Comment this if you don't want to serve the Debian /usr/share/doc
+# Comment this out if you don't want to serve the Debian /usr/share/doc
 # as part of your server
 default.putChild('doc', static.File('/usr/share/doc'))
 
