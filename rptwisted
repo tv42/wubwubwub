@@ -71,6 +71,8 @@ def main():
             os.system('a2enmod proxy')
         writeFile('/etc/apache2/sites-available/%(vhost)s-%(apache-port)s'%opt,
                   apacheConfig % opt, opt['force'])
+	os.symlink('../sites-available/%(vhost)s-%(apache-port)s" % opt,
+	           '/etc/apache2/sites-enabled/%(vhost)s-%(apache-port)s'%opt)
         # ????
         # What should I write to
         # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
