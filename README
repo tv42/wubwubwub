@@ -11,6 +11,11 @@ of
 - site -- a web.server.Site, the factory
 - application -- a twisted.internet.app.Application
 
+For more explanations about how Twisted.Web works, pleases see the
+"Using Twisted.Web" HOWTO, available at
+/usr/share/doc/twisted-doc/howto/using-twistedweb.xhtml when you
+install the "twisted-doc" package.
+
 If some other program is running on port 80 Twisted-Web will be disabled until
 you change /etc/twisted-web/disable to be empty. You should do this after
 changing the configuration of Twisted-Web to listen on some other port, or
