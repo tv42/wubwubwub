@@ -19,7 +19,7 @@ class Options(usage.Options):
 
 header='''\
 ####
-#### Automatically added by ...
+#### Automatically added by rptwisted
 ####
 '''
 
