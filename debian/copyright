@@ -13,4 +13,6 @@ and this package contains bits of code from tap2deb, and hence is
 a derived work of tap2deb, and is under the GNU Lesser General
 Public License
 
+All the other code is (c) Moshe Zadka, and is also released under the LGPL
+
 On Debian systems, the LGPL is in /usr/share/common-licenses/LGPL-2.1
