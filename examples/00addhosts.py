@@ -10,3 +10,5 @@ vhostDir = '/var/www/vhost/'
 
 for file in os.listdir(vhostDir):
     root.addHost(file, static.File(os.path.join(vhostDir, file)))
+    # If you want www.<host> to point to the same place --
+    #root.addHost('www.'+file, static.File(os.path.join(vhostDir, file)))
