@@ -71,6 +71,16 @@ by two decimal digits. This convention, together with the fact that
 the scripts are read in lexicographical order, allows the order of
 evaluation to be easily seen (and modified, if so desired).
 
+Ports
+- - -
+
+Since ports are often needed to be modified by programs, the port list
+is kept in /etc/twisted-web/ports for HTTP ports and /etc/twisted-web/ssl-ports
+for ports served via HTTPS. The code which is responsible for listening
+on them is in /etc/twisted-web/twisted-web, so it is possible to disable
+it. Note, however, that programs such as rptwisted (described below) depend
+on this configuration, and may not work effectively if it is disabled.
+
 Dynamic User Pages
 - - - - - - - - - 
 
