@@ -7,7 +7,7 @@ import pwd, grp, glob
 import glob
 
 # The root of the HTTP hierarchy
-root = static.File('/var/www')
+default = static.File('/var/www')
 
 # The default processors in Twisted, by file extension.
 # These make some file extensions not being sent to the user,
@@ -15,7 +15,7 @@ root = static.File('/var/www')
 #
 # Do *NOT* turn any of this on if untrusted users can put files
 # in the document hierarchy.
-root.processors = {
+default.processors = {
 #    '.cgi': twcgi.CGIScript,
 #    '.php3': twcgi.PHP3Script,
 #    '.php': twcgi.PHPScript,
@@ -28,31 +28,31 @@ root.processors = {
 # http://host/users/fred/foo/bar.html will map to
 # ~fred/public_html/foo/bar.html
 #
-root.putChild('users', distrib.UserDirectory())
+default.putChild('users', distrib.UserDirectory())
 
 # Comment this if you don't want /cgi-bin/ to execute CGI programs
-root.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
+default.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
 
 # Comment this if you don't want to serve the Debian /usr/share/doc
 # as part of your server
-root.putChild('doc', static.File('/usr/share/doc'))
+default.putChild('doc', static.File('/usr/share/doc'))
 
 # Change this if you want default mime-type to be different:
-# root.defaultType = 'text/html'
+# default.defaultType = 'text/html'
 
 # Add more mime-types
-root.contentTypes = root.contentTypes.copy()
-# root.contentTypes['extension'] = 'mime/type'
+default.contentTypes = default.contentTypes.copy()
+# default.contentTypes['extension'] = 'mime/type'
 
 # Uncomment this so /path/to/foo can serve /path/to/foo.bar
-# root.allowExt = 1
+# default.allowExt = 1
 
 # Add more indexes
 # http://host/foo/ will serve index.html, index.rpy or index.php,
 # the first which exists.
 # If none exist, it will generate a directory listing.
 #
-root.indexNames = [
+default.indexNames = [
     'index.html',
 #     'index.rpy',
 #     'index.php',
@@ -66,12 +66,11 @@ root.indexNames = [
 logPath = None
 
 # Allow the requestor to tell us which host we are
-# root.putChild('vhost', vhost.VHostMonsterResource())
+# default.putChild('vhost', vhost.VHostMonsterResource())
 
 # Make sure it is easy to add new virtual hosts:
-newRoot = vhost.NameVirtualHost()
-newRoot.default = root
-root = newRoot
+root = vhost.NameVirtualHost()
+root.default = default
 
 # To add virtual hosts
 #
@@ -104,13 +103,14 @@ for port in ssl_ports:
 
 # If you do not want to modify this file directly, most modifications
 # can be done via putting a Python file in /etc/twisted-web/local.d
-# This file will have access to root, site and application and
+# This file will have access to root, default, site and application and
 # can call any method or change any attribute on them.
 #
 # If you want to change the root itself, "root=something" will not
 # have the desired effect. Instead, use site.resource=something
 #
-dictionary = {'root': root, 'site': site, 'application': application}
+dictionary = {'root': root, 'site': site, 'application': application,
+              'default': default}
 files = glob.glob("/etc/twisted-web/local.d/*.py")
 files.sort()
 for file in files:

@@ -17,6 +17,7 @@ All example drop-in configuation files follow this convention.
 Drop-in configuration files are evaluated inside a namespace consisting
 of 
 - root -- the root resource, usually a NameVirtualHost
+- default -- the default File root for names which are not virtual hosts
 - site -- a web.server.Site, the factory
 - application -- a twisted.internet.app.Application
 
