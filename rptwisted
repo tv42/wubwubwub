@@ -34,19 +34,20 @@ root.default.putChild('vhost', vhost.VHostMonsterResource())
 
 apacheConfig='''\
 <VirtualHost *>
-ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache_port)s/
+ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache-port)s/
 ServerName %(vhost)s
 ServerAdmin webmaster@%(vhost)s
 </VirtualHost>
 '''
 
 
-def writeFile(name, content, force):
+def writeFile(name, content, force, comment=1):
     if not force and os.path.exists(name):
          print "warning: %s exists, not modifying" % name
          return
     fp = open(name+'-', 'w')
-    fp.write(header)
+    if comment:
+        fp.write(header)
     fp.write(content)
     fp.close()
     os.rename(name+'-', name)
@@ -73,7 +74,7 @@ def setPorts(newPort):
         open(confdir('disabled'), 'w').close()
     if newPort not in currentPorts:
         currentPorts.append(newPort)
-    writeFile(confdir('ports'), '\n'.join(map(str, ports))+'\n', 1)
+    writeFile(confdir('ports'), '\n'.join(map(str, currentPorts))+'\n', 1, 0)
 
 
 def addApacheVhost(vhost, apache_port, force):
@@ -98,7 +99,7 @@ def main(argv):
     opt = Options()
     opt.parseOptions(argv)
     configureSystem(opt['force'], opt['apache'], opt['port'], opt['vhost'],
-                    opt['apache_port'])
+                    opt['apache-port'])
 
 
 def run():
