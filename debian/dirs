@@ -3,6 +3,7 @@ etc/init.d
 etc/default
 var/lib/twisted-web
 usr/share/twisted-web
+usr/share/twisted-web/packages/
 usr/share/doc/twisted-web
 usr/share/doc/twisted-web/examples
 var/log/twisted-web
