@@ -93,12 +93,14 @@ gid = grp.getgrnam('www-data')[2]
 # want to modify this line.
 application = app.Application("web", uid=uid, gid=gid)
 
-# Listen on port.
-# Usually, listening on port 80 is the correct thing.
-application.listenTCP(80, site)
+# Listen on all ports specified:
+ports = map(int, open("/etc/twisted-web/ports").read().split())
+ssl_ports = map(int, open("/etc/twisted-web/ssl-ports").read().split())
 
-# Uncomment to support https
-# application.listenSSL(443, site, 'server.pem', 'server.pem')
+for port in ports:
+    application.listenTCP(port, site)
+for port in ssl_ports:
+    application.listenSSL(port, site)
 
 # If you do not want to modify this file directly, most modifications
 # can be done via putting a Python file in /etc/twisted-web/local.d

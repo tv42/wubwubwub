@@ -32,15 +32,6 @@ from twisted.web import vhost
 root.default.putChild('vhost', vhost.VHostMonsterResource())
 '''
 
-file50changeport='''\
-for i in range(len(application.tcpPorts)):
-    if application.tcpPorts[i][0] == 80:
-        del application.tcpPorts[i]
-        break
-
-application.listenTCP(%(port)s, site)
-'''
-
 apacheConfig='''\
 <VirtualHost *>
 ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache-port)s/
@@ -49,9 +40,10 @@ ServerAdmin webmaster@%(vhost)s
 </VirtualHost>
 '''
 
+
 def writeFile(name, content, force):
     if not force and os.path.exists(name):
-         print "warning: %s exists, not touching" % name
+         print "warning: %s exists, not modifying" % name
          return
     fp = open(name+'-', 'w')
     fp.write(header)
@@ -59,37 +51,51 @@ def writeFile(name, content, force):
     fp.close()
     os.rename(name+'-', name)
 
+
 def system(cmd):
     r = os.system(cmd)
     if r != 0:
         raise OSError("command returned non-zero: %d" % r)
 
+
 def confdir(*names):
     return os.path.join('/etc/twisted-web', *names)
 
+
 def a2confdir(*names):
     return os.path.join('/etc/apache2', *names)
+
+
+def setPorts(newPort)
+    currentPorts = map(int, open('/etc/twisted-web/ports').read().split())
+    if 80 in currentPorts:
+        currentPorts.remove(80)
+        open(confdir('disabled'), 'w').close()
+    if newPort not in currentPorts:
+        currentPorts.append(newPort)
+    writeFile(confdir('ports'), '\n'.join(map(str, ports))+'\n', 1)
+
+
+def addApacheVhost(opt, force):
+    fname = '%(vhost)s-%(apache-port)s' % opt
+    if not os.path.exists(a2confdir('mods-enabled/proxy.load')):
+        system('a2enmod proxy')
+    writeFile(a2confdir('sites-available', fname), apacheConfig % opt,force)
+    os.symlink('../sites-available/'+fname,
+               a2confdir('sites-enabled', fname))
+
 
 def main():
     opt = Options()
     opt.parseOptions()
     force = opt['force']
+    setPorts(int(opt['port']))
     writeFile(confdir('local.d/02vhostmonster.py'), file02vhostmonster, force)
-    writeFile(confdir('local.d/50changeport.py'), file50changeport % opt, force)
     if opt['apache']:
-        fname = '%(vhost)s-%(apache-port)s' % opt
-        if not os.path.exists(a2confdir('mods-enabled/proxy.load')):
-            system('a2enmod proxy')
-        writeFile(a2confdir('sites-available', fname), apacheConfig % opt,force)
-	os.symlink('../sites-available/'+fname,
-	           a2confdir('sites-enabled', fname))
-        # ????
-        # What should I write to
-        # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
-    open(confdir('disabled'), 'w').close()
-    system('invoke-rc.d twisted-web restart')
-    if opt['apache']:
-        system('invoke-rc.d apache2 reload')
+        addApacheVhost(opt, force)
+    for service in ['twisted-web']+opt['apache']*['apache2']:
+        system('invoke-rc.d %s restart' % service)
+
 
 def run():
     try:

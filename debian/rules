@@ -23,7 +23,8 @@ install-stamp: build-stamp
 	dh_installdirs
 	dh_installdebconf
 	dh_installman rptwisted.8
-	install -m 644 twisted-web ${DIR}/etc/twisted-web/
+	install -m 644 debian/ports debian/ssl-ports twisted-web \
+	               ${DIR}/etc/twisted-web/
 	install -m 755 debian/init.d ${DIR}/etc/init.d/twisted-web
 	install -m 644 debian/default ${DIR}/etc/default/twisted-web
 	install -m 644 debian/copyright README.mod_proxy README \
