@@ -8,9 +8,8 @@ import glob
 # If you want to change the root itself, "root=something" will not
 # have the desired effect. Instead, use site.resource=something
 #
-dictionary = {}
 for dir in ('package.d', 'local.d'):
     files = glob.glob("/etc/wubwubwub/%s/*.py" % dir)
     files.sort()
     for file in files:
-        execfile(file, dictionary)
+        execfile(file, {})

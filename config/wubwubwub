@@ -4,9 +4,8 @@
 # files to /etc/wubwubwub/local.d
 # Refer to README for more details.
 # 
-d = {}
-execfile("/etc/wubwubwub/default", d)
-execfile("/etc/wubwubwub/root", d)
-execfile("/etc/wubwubwub/site", d)
-execfile("/etc/wubwubwub/application", d)
-execfile("/etc/wubwubwub/directories", d)
+import os
+from wubwubwub import config
+
+for fname in ['default', 'root', 'site', 'application', 'directories']:
+    execfile(os.path.join('/etc/wubwubwub', fname), {})
