@@ -1,3 +1,9 @@
+twisted-web (0.19) unstable; urgency=low
+
+  * More examples
+
+ -- Moshe Zadka <moshez@debian.org>  Fri, 22 Nov 2002 05:32:01 -0600
+
 twisted-web (0.18) unstable; urgency=low
 
   * Add twisted-web-users (disabled by default) to start/stop individual
