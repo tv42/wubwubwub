@@ -3,11 +3,14 @@ Twisted.Web Debian Package
 
 Our Motto: Making Twisted.Web look like Apache since 2002
 
-Configuration
--------------
+This file documents the specific configuration framework used for the
+Debian package of Twisted.Web. For non-trivial options which are not
+covered here, be sure to read
+/usr/share/doc/twisted-doc/howto/using-twistedweb.xhtml 
+(in the "twisted-doc" package).
 
 Explanation of Default Configuration
-- - - - - - - - - - - - - - - - - - 
+------------------------------------
 
 The default's configuration goals are the following, in this order
 
@@ -44,7 +47,7 @@ if it exists.
 Any documents with unrecognized extension are served as text/html.
 
 Modifications and Smooth Upgrades
-- - - - - - - - - - - - - - - - -
+---------------------------------
 
 In order to avoid modifying the configuration files so maintainer updates
 can happen smoothly, please put local configuration files in
@@ -72,7 +75,7 @@ the scripts are read in lexicographical order, allows the order of
 evaluation to be easily seen (and modified, if so desired).
 
 Ports
-- - -
+-----
 
 Since ports are often needed to be modified by programs, the port list
 is kept in /etc/twisted-web/ports for HTTP ports and /etc/twisted-web/ssl-ports
@@ -82,7 +85,7 @@ it. Note, however, that programs such as rptwisted (described below) depend
 on this configuration, and may not work effectively if it is disabled.
 
 Dynamic User Pages
-- - - - - - - - - 
+------------------
 
 In order to let users' home dirs be able to have dynamic pages, enable
 twisted-web-users by removing the "exit 0" from /etc/default/twisted-web-users.
@@ -96,7 +99,7 @@ twistd2.2 -f ~/web.tap $1
 '''
 
 Reverse Proxy Configuration
-- - - - - - - - - - - - - - 
+---------------------------
 
 If some other program is running on port 80 Twisted-Web will be disabled until
 you change /etc/twisted-web/disable to be empty. You should do this after
@@ -121,10 +124,3 @@ ServerName example.com
 '''
 
 Remember to symlink it to sites-enabled, and restart Apache2!
-
-Further Resources
------------------
-For more explanations about how Twisted.Web works, pleases see the
-"Using Twisted.Web" HOWTO, available at
-/usr/share/doc/twisted-doc/howto/using-twistedweb.xhtml when you
-install the "twisted-doc" package.
