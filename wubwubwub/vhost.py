@@ -21,6 +21,6 @@ class VhostLoggingNevowSite(appserver.NevowSite):
             'code': request.code,
             'sent': request.sentLength or "-",
             'referer': request.getHeader("referer") or "-",
-            'header': request.getHeader("user-agent") or "-",
+            'useragent': request.getHeader("user-agent") or "-",
             }
-        self.logFile.write(format % data)
+        self.logFile.write(self.format % data)
