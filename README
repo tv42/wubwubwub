@@ -15,7 +15,7 @@ Explanation of Default Configuration
 The default configuration's goals are the following, in this order
 
 * Maximum safety - Always err on side of locking down too much, and let the
-  user open up options of dubvious safety.
+  user open up options of dubious safety.
 * Maximum familiarity - If the choices don't present any inherent danger,
   configure to be as similar to the standard web server configuration. The
   Apache configuration being the most thorough is the reason for the motto.
@@ -30,7 +30,7 @@ all pointing to /var/www. No "processors" are enabled, so it is possible
 to allow untrusted parties to put files in /var/www without giving them
 the ability to run code as www-data. 
 
-/doc is pointed to /usr/share/doc/, so all the debian documentation is
+/doc is pointed to /usr/share/doc/, so all the Debian documentation is
 served by default (which means, for example, dhelp works).
 
 /cgi-bin is pointed to /usr/lib/cgi-bin/, so third-party packages CGI
@@ -44,7 +44,7 @@ if it exists.
 /~name/, or /~name.twistd/, function the same as /users/name/ or
 /users/name.twistd/.
 
-Any documents with unrecognized extension are served as text/html.
+Any documents with unrecognised extension are served as text/html.
 
 Modifications and Smooth Upgrades
 ---------------------------------
@@ -54,7 +54,7 @@ can happen smoothly, please put local configuration files in
 /etc/twisted-web/local.d
 All .py files in this directory are evaluated according to lexical order.
 It is recommended files will begin with two digits to set the order.
-All example drop-in configuation files follow this convention.   
+All example drop-in configuration files follow this convention.   
 
 Drop-in configuration files are evaluated inside a namespace consisting
 of 
@@ -94,7 +94,7 @@ A user who wants dynamic pages should somehow make sure a personal server is
 up and running. The easiest way to do this is to use the mktap web command
 with the --personal argument, and then start the server with
 '''
-then twistd2.2 -f ~/web.tap;fi
+twistd2.2 -f ~/web.tap
 '''
 
 Reverse Proxy Configuration
@@ -123,3 +123,21 @@ ServerName example.com
 '''
 
 Remember to symlink it to sites-enabled, and restart Apache2!
+
+
+Packages Containing Resources
+-----------------------------
+
+/usr/lib/rpy-bin is served as a ResourceScriptDirectory -- anything in
+it is assumed to be a ResourceScript, and will be served as such.
+If your package has a Resource it wants to serve, Depend: on twisted-web,
+and drop your ResourceScript (which does *not* have to be named .rpy)
+in /usr/lib/rpy-bin. In particular if your package wants to serve a portion
+of the web site, perhaps as a different user, use ResourcePublisher to
+listen on a socket somewhere on /var/run, and have a ResourceSubscriber
+in a ResourceScript which is then dropped in /usr/lib/rpy-bin. It is
+possible to cache the ResourceSubscriber in the registry. For more
+information about writing resources, see the using-twistedweb.xhtml document
+in twisted-doc. Note that starting and stopping your server is still
+your responsibility.
+
