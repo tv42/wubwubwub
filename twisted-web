@@ -44,8 +44,16 @@ default.putChild('doc', static.File('/usr/share/doc'))
 default.contentTypes = default.contentTypes.copy()
 # default.contentTypes['extension'] = 'mime/type'
 
-# Uncomment this so /path/to/foo can serve /path/to/foo.bar
-# default.allowExt = 1
+# Ignore all extensions -- Allow /foo/bar.ext to be served for /foo/bar
+# Uncomment to enable
+# default.ignoreExt('*')
+
+# Ignore a partial list of extensions
+# default.ignoreExt('html') # Allow /foo.html to be served for /foo
+# default.ignoreExt('jpg')
+# Useful to make ResourceScripts which look like directories.
+# default.ignoreExt('rpy') 
+
 
 # Add more indexes
 # http://host/foo/ will serve index.html, index.rpy or index.php,
