@@ -3,7 +3,10 @@ from nevow import appserver
 
 class VhostLoggingNevowSite(appserver.NevowSite):
     def log(self, request):
-        """Log a request's result to the logfile, in combined log format prefixed with virtual host name."""
+        """
+        Log a request's result to the logfile.
+        Use combined log format prefixed with virtual host name.
+        """
         if hasattr(self, "logFile"):
             line = '%r %s - - %s "%s" %d %s "%s" "%s"\n' % (
                 request.getHeader('host'),
