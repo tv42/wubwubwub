@@ -76,4 +76,4 @@ def main():
         # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
     os.system('invoke-rc.d twisted-web restart')
     if opt['apache']:
-        os.system('invoke-rc.d apache2 graceful')
+        os.system('invoke-rc.d apache2 reload')
