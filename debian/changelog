@@ -6,6 +6,7 @@ twisted-web (0.25) unstable; urgency=low
     + Add /usr/lib/rpy-lib/ to directories
     + Have a virtual child of the root pointing to /u/l/r-l/
   * Fix init.d to be not-broken
+  * Fix rptwisted a little
 
  -- Moshe Zadka <moshez@debian.org>  Sun, 27 Apr 2003 21:45:02 +0300
 
