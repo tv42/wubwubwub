@@ -1,4 +1,4 @@
-from twisted.web import vhost rewrite
+from twisted.web import vhost, rewrite
 
 # Add a rule to rewrite /~foo/bar.html to /usrs/foo/bar.html
 # so that the classical user URLs will work.
