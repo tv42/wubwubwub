@@ -1,10 +1,11 @@
 # You will not normally need to modify this file.
+from wubwubwub import config
 import pwd, grp
 from twisted.application import service, strports
 
 # Calculate user-id and group-id from names
-uid = pwd.getpwnam(username)[2]
-gid = grp.getgrnam(groupname)[2]
+uid = pwd.getpwnam(config.username)[2]
+gid = grp.getgrnam(config.groupname)[2]
 # Generate the Application.
 application = service.Application("web", uid=uid, gid=gid)
 # Listen on all ports specified:

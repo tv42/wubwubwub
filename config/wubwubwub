@@ -14,12 +14,7 @@ d = {'default': default, 'root': root}
 execfile("/etc/wubwubwub/site", d)
 site = d['site']
 d = {'default': default, 'root': root, 'site': site}
-execfile("/etc/wubwubwub/user", d)
-username, groupname = d['username'], d['groupname']
-d = {'default': default, 'root': root, 'site': site,
-     'username': username, 'groupname': groupname}
 execfile("/etc/wubwubwub/application", d)
 application = d['application']
-d = {'default': default, 'root': root, 'site': site, 'application': application,
-     'username': username, 'groupname': groupname}
+d = {'default': default, 'root': root, 'site': site, 'application': application}
 execfile("/etc/wubwubwub/directories", d)

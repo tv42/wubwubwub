@@ -1,3 +1,6 @@
+"""WubWubWub configuration defaults."""
+from twisted.web import static
+
 # Set user/group to run under
 # Usually, it runs under the www-data user and group.
 username = 'www-data'
