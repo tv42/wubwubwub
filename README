@@ -12,7 +12,7 @@ covered here, be sure to read
 Explanation of Default Configuration
 ------------------------------------
 
-The default's configuration goals are the following, in this order
+The default configuration's goals are the following, in this order
 
 * Maximum safety - Always err on side of locking down too much, and let the
   user open up options of dubvious safety.
