@@ -1,3 +1,9 @@
+wubwubwub (0.0.2) unstable; urgency=low
+
+  * Remove duplicated bits from maintainer scripts, let debhelper handle them.
+
+ -- Tommi Virtanen <tv@debian.org>  Fri, 14 Jan 2005 00:39:01 +0200
+
 wubwubwub (0.0.1) unstable; urgency=low
 
   * Rename to wubwubwub, reset version number.
