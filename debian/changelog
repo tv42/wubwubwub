@@ -1,3 +1,9 @@
+twisted-web (0.13) unstable; urgency=low
+
+  * Depending on debhelper >= 3
+
+ -- Moshe Zadka <moshez@debian.org>  Wed, 13 Nov 2002 05:51:59 -0600
+
 twisted-web (0.12) unstable; urgency=low
 
   * Add 00addhosts.py to the examples directory
