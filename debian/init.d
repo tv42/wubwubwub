@@ -31,7 +31,7 @@ case "$1" in
         while [ -f $pidfile ] && /bin/kill -0 `cat $pidfile`; do \
                  echo -n "."; \
         done
-        echo "Done."	
+        echo " done."	
     ;;
 
     restart)
