@@ -17,7 +17,7 @@ class Options(usage.Options):
                ]
 
     def opt_version(self):
-        print "rptwisted: version 0.19"
+        print "rptwisted: version 0.25"
 	sys.exit()
 
 
