@@ -1,0 +1,9 @@
+/var/log/wubwubwub/access.log /var/log/wubwubwub/vhost/*.log {
+	weekly
+	rotate 52
+	notifempty
+	missingok
+	# TODO SIGHUP here, need to add config file reopening
+	# logic to wubwubwub. Not a problem with vhost logs,
+	# they are reopened (too) often.
+}
