@@ -1,3 +1,9 @@
+twisted-web (0.21) unstable; urgency=low
+
+  * Add more comments to warn against modifying the config file 
+
+ -- Moshe Zadka <moshez@debian.org>  Thu,  6 Feb 2003 02:33:09 -0600
+
 twisted-web (0.20) unstable; urgency=low
 
   * Users script now uses ProcessMonitor 
