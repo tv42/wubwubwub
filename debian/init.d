@@ -28,8 +28,8 @@ case "$1" in
     stop)
         echo -n "Stopping twisted-web: twistd"
         start-stop-daemon --stop --quiet --pidfile $pidfile
-        while [ -f $pidfile ] && /bin/kill -0 `cat $pidfile"; \
-                 do echo -n "."; \
+        while [ -f $pidfile ] && /bin/kill -0 `cat $pidfile`; do \
+                 echo -n "."; \
         done
         echo "Done."	
     ;;
