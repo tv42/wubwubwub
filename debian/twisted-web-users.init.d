@@ -1,43 +1,32 @@
 #!/bin/sh
-
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+pidfile=/var/run/twisted-web-users.pid
+rundir=/var/lib/twisted-web/
+file=/etc/twisted-web/twisted-web-users
+logfile=/var/log/twisted-web/twisted-web-users.log
+more_args=--no_save
 
 [ -r /etc/default/twisted-web-users ] && . /etc/default/twisted-web-users
 
 test -x /usr/bin/twistd2.2 || exit 0
+test -r $file || exit 0
 test -r /usr/share/twisted-web/package-installed || exit 0
 
-if [ -r /etc/twisted-web/twisted-web-users.allow ]; then
-    users=`cat /etc/twisted-web/twisted-web-users.allow`
-else
-    users=`getent passwd|awk -F: '$3>=1000 && $1!="nobody" {printf "grep -q %s /etc/shells && echo %s\n",$7,$1}'|sh`
-    if [ -r /etc/twisted-web/twisted-web-users.deny ]; then
-        temp_users=`for user in $users;do echo $user;done | sort | comm -2 -3 - <(sort /etc/twisted-web-users.deny)`
-        users=$temp_users
-    fi
-fi
 
 case "$1" in
     start)
-        echo -n "Starting twisted-web-users: "
-        for user in $users;
-            do home=`getent passwd $user|awk -F: '{print $6}'`
-            command=$home/.twistd-command
-            (cd $home && su - $user $command --pidfile=$home/.twistd.pid)
-            echo -n "$user "
-        done
-        echo "Done."	
+        echo -n "Starting twisted-web-users: process-manager"
+        start-stop-daemon --start --quiet --exec /usr/bin/twistd2.2 --  \
+                          --pidfile=$pidfile --rundir=$rundir --python=$file\
+                          --logfile=$logfile --quiet $more_args
+        echo "."	
     ;;
 
     stop)
-        echo -n "Stopping twisted-web-users: "
-        for user in $users;
-            do home=`getent passwd $user|awk -F: '{print $6}'`
-            command=$home/.twistd-command
-            kill `cat $home/twistd.pid`
-            echo -n "$user "
-        done
-        echo "Done."	
+        echo -n "Stopping twisted-web-users: process-manager"
+        start-stop-daemon --stop --quiet --pidfile $pidfile
+        echo "."	
     ;;
 
     restart)
