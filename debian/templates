@@ -7,3 +7,6 @@ Description: Cannot bind to port 80
  Twisted-Web to listen on some other port, or changing the configuration
  of the other server. After undisabling Twisted-Web, run the command
  "invoke-rc.d twisted-web" to start the server manually.
+ .
+ If you wish to run Twisted-Web on some other port, and reverse-proxy
+ a specific virtual host to it, please see the rptwisted(8) program.
