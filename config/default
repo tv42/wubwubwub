@@ -39,17 +39,17 @@ default.putChild('doc', static.File('/usr/share/doc'))
 
 # Add more mime-types
 default.contentTypes = default.contentTypes.copy()
-# default.contentTypes['extension'] = 'mime/type'
+# default.contentTypes['.extension'] = 'mime/type'
 
 # Ignore all extensions -- Allow /foo/bar.ext to be served for /foo/bar
 # Uncomment to enable
 # default.ignoreExt('*')
 
 # Ignore a partial list of extensions
-# default.ignoreExt('html') # Allow /foo.html to be served for /foo
-# default.ignoreExt('jpg')
+# default.ignoreExt('.html') # Allow /foo.html to be served for /foo
+# default.ignoreExt('.jpg')
 # Useful to make ResourceScripts which look like directories.
-# default.ignoreExt('rpy') 
+# default.ignoreExt('.rpy') 
 
 
 # Add more indexes
