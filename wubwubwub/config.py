@@ -5,3 +5,6 @@ from twisted.web import static
 # Usually, it runs under the www-data user and group.
 username = 'www-data'
 groupname = 'www-data'
+
+# The root of the HTTP hierarchy
+default = static.File('/var/www')

@@ -6,15 +6,13 @@
 # 
 d = {}
 execfile("/etc/wubwubwub/default", d)
-default = d['default']
-d = {'default': default}
 execfile("/etc/wubwubwub/root", d)
 root = d['root']
-d = {'default': default, 'root': root}
+d = {'root': root}
 execfile("/etc/wubwubwub/site", d)
 site = d['site']
-d = {'default': default, 'root': root, 'site': site}
+d = {'root': root, 'site': site}
 execfile("/etc/wubwubwub/application", d)
 application = d['application']
-d = {'default': default, 'root': root, 'site': site, 'application': application}
+d = {'root': root, 'site': site, 'application': application}
 execfile("/etc/wubwubwub/directories", d)

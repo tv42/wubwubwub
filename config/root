@@ -1,8 +1,9 @@
+from wubwubwub import config
 from nevow import vhost
 
 # Make sure it is easy to add new virtual hosts:
 root = vhost.NameVirtualHost()
-root.default = default
+root.default = config.default
 
 # To add virtual hosts
 #
