@@ -26,7 +26,7 @@ install-stamp: build-stamp
 	dh_installdirs
 	dh_installdebconf
 	dh_installman man/rptwisted.8 man/twconfcheck.8
-	install -m 644 config/ports config/ssl-ports config/twisted-web \
+	install -m 644 config/ports config/user config/twisted-web \
 	               config/default config/root config/site \
 	               config/application config/directories \
 	               ${DIR}/etc/twisted-web/
