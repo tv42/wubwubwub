@@ -1,5 +1,5 @@
 # For more information and general comments on editing this file
-# please refer to README.Debian
+# please refer to /usr/share/doc/twisted-web/README
 # 
 from twisted.web import script, static, server, distrib, twcgi, vhost, rewrite
 from twisted.internet import app
