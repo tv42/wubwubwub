@@ -60,6 +60,17 @@ of
 - site -- a web.server.Site, the factory
 - application -- a twisted.internet.app.Application
 
+Examples of such configuration scripts are in
+/usr/share/doc/twisted-doc/examples
+Note: Do *not* copy all scripts blindly. Some are positively dangerous,
+and some need to be tweaked before used. Please read the comments in
+each example before using it.
+
+Note that the examples use the convention of prefixing every script name
+by two decimal digits. This convention, together with the fact that
+the scripts are read in lexicographical order, allows the order of
+evaluation to be easily seen (and modified, if so desired).
+
 Dynamic User Pages
 - - - - - - - - - 
 
