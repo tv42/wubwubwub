@@ -7,15 +7,15 @@ DIR=debian/twisted-web
 build: build-stamp
 build-stamp:
 	dh_testdir
-        lore
-	lynx -dump -nolist README.xhtml > README 
+	lore
+	lynx -force_html -dump -nolist README.xhtml > README 
 	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp install-stamp
-        rm -f README.xhtml README
+	rm -f README.xhtml README
 	dh_clean
 
 install: install-stamp
