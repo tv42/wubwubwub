@@ -2,14 +2,14 @@ Source: twisted-web
 Section: net
 Priority: extra
 Maintainer: Moshe Zadka <moshez@debian.org>
-Build-Depends-Indep: debhelper (>= 3), python2.2-twisted, lynx
+Build-Depends-Indep: debhelper (>= 3), python2.3-twisted, lynx
 Standards-Version: 3.5.7
 
 Package: twisted-web
 Architecture: all
-Depends: python2.2, python2.2-twisted (>= 1.0.5), debconf
+Depends: python2.3, python2.3-twisted (>= 1.0.5), python2.3-nevow (>= 0.3.0), debconf
 Provides: httpd
-Suggests: python2.2-pyopenssl, twisted-doc
+Suggests: python2.3-pyopenssl, twisted-doc
 Description: Twisted Web Server
  The necessary configuration files and harness to use the Twisted asynchronous
  network framework to serve HTTP. Supports named virtual hosting, CGI

@@ -7,7 +7,7 @@ DIR=debian/twisted-web
 build: build-stamp
 build-stamp:
 	dh_testdir
-	lore
+	lore --null --inputext=.html --config ext=.xhtml
 	lynx -force_html -dump -nolist README.xhtml > README 
 	touch build-stamp
 

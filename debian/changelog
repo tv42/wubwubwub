@@ -1,3 +1,11 @@
+twisted-web (0.26.1) unstable; urgency=low
+
+  * Use python 2.3.
+  * Nevow support.
+  * Changed log format to include virtual host name.
+
+ -- Tommi Virtanen <tv@debian.org>  Thu, 13 Jan 2005 00:56:32 +0200
+
 twisted-web (0.26) unstable; urgency=low
 
   * Added twconfcheck, which checks configuration for errors

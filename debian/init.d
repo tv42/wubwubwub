@@ -10,7 +10,7 @@ more_args=--no_save
 
 [ -r /etc/default/twisted-web ] && . /etc/default/twisted-web
 
-test -x /usr/bin/twistd2.2 || exit 0
+test -x /usr/bin/twistd2.3 || exit 0
 test -r $file || exit 0
 test -r /usr/share/twisted-web/package-installed || exit 0
 test -r /etc/twisted-web/disable && . /etc/twisted-web/disable
@@ -19,9 +19,9 @@ test -r /etc/twisted-web/disable && . /etc/twisted-web/disable
 case "$1" in
     start)
         echo -n "Starting twisted-web: twistd"
-        start-stop-daemon --start --quiet --exec /usr/bin/twistd2.2 --  \
+        start-stop-daemon --start --quiet --exec /usr/bin/twistd2.3 --  \
                           --pidfile=$pidfile --rundir=$rundir --python=$file\
-                          --logfile=$logfile --quiet $more_args
+                          --logfile=$logfile $more_args
         echo "."	
     ;;
 

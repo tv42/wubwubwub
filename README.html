@@ -110,7 +110,7 @@ it is possible to disable it. Note, however, that programs such as
 if it is disabled.</p>
 
 <p>Note that if you enable any of the <code>ssl-ports</code>, you should install
-<code>python2.2-pyopenssl</code> for them to work correctly.</p>
+<code>python2.3-pyopenssl</code> for them to work correctly.</p>
 
 <h2>Conffiles</h2>
 
@@ -144,13 +144,13 @@ up and running. The easiest way to do this is to use the
 with the <code>--personal</code> argument, and then start the server with</p>
 
 <pre class="shell">
-twistd2.2 -f ~/web.tap
+twistd2.3 -f ~/web.tap
 </pre>
 
 <p>Starting servers can be done with <code>crontab</code> and a line like:</p>
 
 <pre>
-@reboot cd $HOME;twistd2.2 -f ~/web.tap
+@reboot cd $HOME;twistd2.3 -f ~/web.tap
 </pre>
 
 <h2>Reverse Proxy Configuration</h2>
