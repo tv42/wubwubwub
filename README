@@ -15,14 +15,14 @@ Explanation of Default Configuration
 The default's configuration goals are the following, in this order
 
 * Maximum safety - Always err on side of locking down too much, and let the
-  user open up options of dunvious safety.
+  user open up options of dubvious safety.
 * Maximum familiarity - If the choices don't present any inherent danger,
   configure to be as similar to the standard web server configuration. The
   Apache configuration being the most thorough is the reason for the motto.
 * Maximum flexibility - As long as it is not unsafe nor too surprising, try
   to have a configuration which lends as much power to the end user.
 
-The user it runs as (after binding to port 80) is www-data, and the
+The user it runs as (after binding to ports) is www-data, and the
 group is also www-data.
 
 By default, the configuration is to handle all hostnames to be the same --
@@ -97,6 +97,12 @@ something like
 '''
 twistd2.2 -f ~/web.tap $1
 '''
+
+This init script tries to guess users based on a number of heuristics.
+If you want an explicit list of users whose personal server should
+be started or stopped, put it in /etc/twisted-web/twisted-web-users.allow.
+If there are specific users which you want to deny, put their user
+names (in a format of one-per-line) in /etc/twisted-web/twisted-web-users.deny.
 
 Reverse Proxy Configuration
 ---------------------------
