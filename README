@@ -141,3 +141,11 @@ information about writing resources, see the using-twistedweb.xhtml document
 in twisted-doc. Note that starting and stopping your server is still
 your responsibility.
 
+
+Purging Twisted-Web
+-------------------
+
+Note that files in /etc/twisted-web/local.d are *not* deleted as part
+of the purge. These file are the system administrator's creations.
+If you want to get rid of them, run
+rm -f /etc/twisted-web/local.d/*
