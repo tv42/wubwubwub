@@ -90,24 +90,12 @@ python2.2-pyopenssl for them to work correctly.
 Dynamic User Pages
 ------------------
 
-In order to let users' home dirs be able to have dynamic pages, enable
-twisted-web-users by removing the "exit 0" from /etc/default/twisted-web-users.
-A user who wants dynamic pages should put in his $HOME/.twisted-command
-a command "personal server". It is very important that this command will
-*not* daemonize, but serve in the same process it started in. This allows
-the twisted-web-users process to monitor it and restart it if it dies.
-The easiest way to do this is to use the mktap web command with the 
---personal argument, and put in $HOME/.twisted-command
-something like
+A user who wants dynamic pages should somehow make sure a personal server is
+up and running. The easiest way to do this is to use the mktap web command
+with the --personal argument, and then start the server with
 '''
-twistd2.2 -f ~/web.tap -n
+then twistd2.2 -f ~/web.tap;fi
 '''
-
-This init script tries to guess users based on a number of heuristics.
-If you want an explicit list of users whose personal server should
-be started or stopped, put it in /etc/twisted-web/twisted-web-users.allow.
-If there are specific users which you want to deny, put their user
-names (in a format of one-per-line) in /etc/twisted-web/twisted-web-users.deny.
 
 Reverse Proxy Configuration
 ---------------------------

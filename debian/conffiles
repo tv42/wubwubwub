@@ -1,7 +1,5 @@
 /etc/init.d/twisted-web
-/etc/init.d/twisted-web-users
 /etc/default/twisted-web
-/etc/default/twisted-web-users
 /etc/twisted-web/twisted-web
 /etc/twisted-web/ports
 /etc/twisted-web/ssl-ports

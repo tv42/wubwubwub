@@ -4,6 +4,5 @@ set -e
 . /usr/share/debconf/confmodule
 if [ "$1" = purge ]; then
         update-rc.d twisted-web remove >/dev/null
-        update-rc.d twisted-web-users remove >/dev/null
 	db_purge
 fi
