@@ -33,7 +33,10 @@ resource.contentTypes = root.contentTypes.copy()
 # resource.contentTypes['extension'] = 'mime/type'
 
 # Uncomment this so /path/to/foo can serve /path/to/foo.bar
-# resource.allowExt = 1
+# resource.ignoreExt('*')
+# Or ignore specific extensions
+# resource.ignoreExt('html')
+# resource.ignoreExt('rpy')
 
 # Add more indexes
 # http://host/foo/ will serve index.html, index.rpy or index.php,

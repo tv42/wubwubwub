@@ -4,5 +4,7 @@
 #
 from twisted.web import script, static
 
-if isinstance(root.default, static.File):
-    root.processors['.rpy'] = script.ResourceScript
+default.processors['.rpy'] = script.ResourceScript
+
+# To make .rpy processing transparent:
+# default.ignoreExt('rpy')

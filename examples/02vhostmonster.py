@@ -9,4 +9,4 @@
 #
 from twisted.web import vhost
 
-root.default.putChild('vhost', vhost.VHostMonsterResource())
+default.putChild('vhost', vhost.VHostMonsterResource())
