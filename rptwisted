@@ -34,7 +34,7 @@ root.default.putChild('vhost', vhost.VHostMonsterResource())
 
 apacheConfig='''\
 <VirtualHost *>
-ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache-port)s/
+ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache_port)s/
 ServerName %(vhost)s
 ServerAdmin webmaster@%(vhost)s
 </VirtualHost>
@@ -76,30 +76,34 @@ def setPorts(newPort)
     writeFile(confdir('ports'), '\n'.join(map(str, ports))+'\n', 1)
 
 
-def addApacheVhost(opt, force):
-    fname = '%(vhost)s-%(apache-port)s' % opt
+def addApacheVhost(vhost, apache_port, force):
+    fname = '%(vhost)s-%(apache_port)s' % vars())
     if not os.path.exists(a2confdir('mods-enabled/proxy.load')):
         system('a2enmod proxy')
-    writeFile(a2confdir('sites-available', fname), apacheConfig % opt,force)
+    writeFile(a2confdir('sites-available', fname), apacheConfig % vars(),force)
     os.symlink('../sites-available/'+fname,
                a2confdir('sites-enabled', fname))
 
 
-def main():
-    opt = Options()
-    opt.parseOptions()
-    force = opt['force']
-    setPorts(int(opt['port']))
+def configureSystem(force, apache, port, vhost, apache_port)
+    setPorts(port)
     writeFile(confdir('local.d/02vhostmonster.py'), file02vhostmonster, force)
-    if opt['apache']:
-        addApacheVhost(opt, force)
-    for service in ['twisted-web']+opt['apache']*['apache2']:
+    if apache:
+        addApacheVhost(vhost, apache_port, force)
+    for service in ['twisted-web']+apache*['apache2']:
         system('invoke-rc.d %s restart' % service)
+
+
+def main(argv):
+    opt = Options()
+    opt.parseOptions(argv)
+    configureSystem(opt['force'], opt['apache'], opt['port'], opt['vhost'],
+                    opt['apache_port'])
 
 
 def run():
     try:
-        main()
+        main(sys.argv[1:])
     except (IOError, OSError), e:
         sys.exit(str(e))
     except usage.UsageError, e:
