@@ -18,4 +18,19 @@ changing the configuration of the other server. After undisabling Twisted-Web,
 run the command "invoke-rc.d twisted-web" to start the server manually.
 
 rptwisted exists to run Twisted on an out-of-the-way port and prepare it
-to be a reverse proxy.
+to be a reverse proxy.  It will reconfigure Twisted-Web to run on another
+port, and will also, optionally, drop a file in Apache2's configuration
+directory to reverse proxy a named virtual host to the Twisted-Web server.
+
+If you don't use the option to generate the Apache2 virtual host configuration,
+or if you want to add more virtual host configurations, here is the template
+for a file to drop in /etc/apache2/sites-available:
+
+'''
+<VirtualHost *>
+ProxyPass / http://localhost:8538/vhost/http/example.com:80/
+ServerName example.com
+</VirtualHost>
+'''
+
+Remember to symlink it to sites-enabled, and restart Apache2!
