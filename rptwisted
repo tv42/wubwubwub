@@ -66,7 +66,7 @@ def a2confdir(*names):
     return os.path.join('/etc/apache2', *names)
 
 
-def setPorts(newPort)
+def setPorts(newPort):
     currentPorts = map(int, open('/etc/twisted-web/ports').read().split())
     if 80 in currentPorts:
         currentPorts.remove(80)
