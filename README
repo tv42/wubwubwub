@@ -174,3 +174,13 @@ Note that files in /etc/twisted-web/local.d are *not* deleted as part
 of the purge. These file are the system administrator's creations.
 If you want to get rid of them, run
 rm -f /etc/twisted-web/local.d/*
+
+
+Checking Configuration
+----------------------
+
+When the configuration changes, it is highly recommended to run
+"twconfcheck". This program, which can be run as a regular user,
+will execute the configuration and check the application object
+for simple mistakes. This will increase signifcantly that a
+"invoke-rc.d twisted-web restart" will succeed.

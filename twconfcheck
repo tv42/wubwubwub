@@ -1,0 +1,14 @@
+#!/usr/bin/python2.2
+import sys
+
+FILE="/etc/twisted-web/twisted-web"
+d = {}
+execfile(FILE, d)
+if not d.has_key('application'):
+    sys.exit("%s: no application defined in %r" % (sys.argv[0], FILE))
+application = d['application']
+if not hasattr(application, 'run'):
+    sys.exit("%s: application has no 'run' attribute" % sys.argv[0])
+run = application.run
+if not callable(run):
+    sys.exit("%s: run attribute of application is not callable" % sys.argv[0])
