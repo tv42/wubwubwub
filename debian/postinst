@@ -5,17 +5,17 @@ set -e
 
 . /usr/share/debconf/confmodule 
 
-if [ -r /etc/twisted-web/disable ]; then
+if [ -r /etc/wubwubwub/disable ]; then
 	:
 else
 	if [ -n "`netstat -plunt | awk '{print $4}' | grep ':80$'`" ]; then
-		echo "exit 0" > /etc/twisted-web/disable
-		db_input high twisted-web/cant-bind || true 
+		echo "exit 0" > /etc/wubwubwub/disable
+		db_input high wubwubwub/cant-bind || true 
 		db_go || true
 	else
-		touch /etc/twisted-web/disable 
+		touch /etc/wubwubwub/disable 
 	fi;
 fi
-update-rc.d twisted-web defaults >/dev/null
-invoke-rc.d twisted-web start
+update-rc.d wubwubwub defaults >/dev/null
+invoke-rc.d wubwubwub start
 db_stop

@@ -61,7 +61,7 @@ personal server, if it exists.</p>
 
 <p>In order to avoid modifying the configuration files so maintainer updates
 can happen smoothly, please put local configuration files in
-<code>/etc/twisted-web/local.d</code>.
+<code>/etc/wubwubwub/local.d</code>.
 All <code>.py</code> files in this directory are evaluated according to
 lexical order.
 It is recommended files will begin with two digits to set the order.
@@ -99,7 +99,7 @@ evaluation to be easily seen (and modified, if so desired).</p>
 <h2>Ports</h2>
 
 <p>Since ports are often needed to be modified by programs, the port list
-is kept in <code>/etc/twisted-web/ports</code>. These are strports-compatible ports:
+is kept in <code>/etc/wubwubwub/ports</code>. These are strports-compatible ports:
 "8080", "tcp:8080:interface=127.0.0.1" and "ssl:8080" are all valid
 options, as well as more esoteric options like "unix:/foo:listen=100".</p>
 
@@ -110,24 +110,24 @@ options, as well as more esoteric options like "unix:/foo:listen=100".</p>
 
 <p>In case you do want to modify the package's conffiles, note that they
 have been partitioned into logical pieces.
-<code>/etc/twisted-web/twisted-web</code>
+<code>/etc/wubwubwub/wubwubwub</code>
 is the master configuration, which loads all others. It should rarely,
 if ever, be modified.</p>
 
 <p>The configuration loads the following files:</p>
 
 <dl>
-<dt><code>/etc/twisted-web/default</code></dt>
+<dt><code>/etc/wubwubwub/default</code></dt>
 <dd>create the default web site</dd>
-<dt><code>/etc/twisted-web/root</code></dt>
+<dt><code>/etc/wubwubwub/root</code></dt>
 <dd>create the root site (as a virtual hosted site)</dd>
-<dt><code>/etc/twisted-web/site</code></dt>
+<dt><code>/etc/wubwubwub/site</code></dt>
 <dd>create the Site factory</dd>
-<dt><code>/etc/twisted-web/application</code></dt>
+<dt><code>/etc/wubwubwub/application</code></dt>
 <dd>create the application object, listen on ports</dd>
-<dt><code>/etc/twisted-web/directories</code></dt>
-<dd>read the scripts inside <code>/etc/twisted-web/package.d</code>
-and <code>/etc/twisted-web/local.d</code></dd>
+<dt><code>/etc/wubwubwub/directories</code></dt>
+<dd>read the scripts inside <code>/etc/wubwubwub/package.d</code>
+and <code>/etc/wubwubwub/local.d</code></dd>
 </dl>
 
 <h2>Dynamic User Pages</h2>
@@ -149,20 +149,20 @@ twistd2.3 -f ~/web.tap
 
 <h2>Reverse Proxy Configuration</h2>
 
-<p>If some other program is running on port 80 Twisted-Web will be disabled
+<p>If some other program is running on port 80 Wubwubwub will be disabled
 until
-you change <code>/etc/twisted-web/disable</code> to be empty. You should do
+you change <code>/etc/wubwubwub/disable</code> to be empty. You should do
 this after
-changing the configuration of Twisted-Web to listen on some other port, or
-changing the configuration of the other server. After undisabling Twisted-Web,
-run the command <code>invoke-rc.d twisted-web start</code> to start the server
+changing the configuration of Wubwubwub to listen on some other port, or
+changing the configuration of the other server. After undisabling Wubwubwub,
+run the command <code>invoke-rc.d wubwubwub start</code> to start the server
 manually.</p>
 
 <p><code>rptwisted</code> exists to run Twisted on an out-of-the-way port and
 prepare it
-to be a reverse proxy.  It will reconfigure Twisted-Web to run on another
+to be a reverse proxy.  It will reconfigure Wubwubwub to run on another
 port, and will also, optionally, drop a file in Apache2's configuration
-directory to reverse proxy a named virtual host to the Twisted-Web server.</p>
+directory to reverse proxy a named virtual host to the Wubwubwub server.</p>
 
 <p>Running rptwisted without Apache 2 support:</p>
 <pre>
@@ -194,7 +194,7 @@ ServerName example.com
 <code>ResourceScriptDirectory</code> -- anything in
 it is assumed to be a <code>ResourceScript</code>, and will be served as such.
 If your package has a <code>Resource</code> it wants to serve,
-<code>Depend:</code> on <code>twisted-web</code>,
+<code>Depend:</code> on <code>wubwubwub</code>,
 and drop your <code>ResourceScript</code> (which does *not* have to be named
 <code>.rpy</code>)
 in <code>/usr/lib/rpy-lib</code>. In particular if your package wants to serve
@@ -214,18 +214,18 @@ server is still your responsibility.</p>
 
 <h2>Packages Wanting to Modify the Configuration</h2>
 
-<p><code>/etc/twisted-web/package.d</code> is designed for packages to drop
+<p><code>/etc/wubwubwub/package.d</code> is designed for packages to drop
 in their
 configurations. For example, a package installing itself in a non-standard
 location may use this to add its directory to <code>sys.path</code>.</p>
 
-<h2>Purging Twisted-Web</h2>
+<h2>Purging Wubwubwub</h2>
 
-<p>Note that files in <code>/etc/twisted-web/local.d</code> are
+<p>Note that files in <code>/etc/wubwubwub/local.d</code> are
 <em>not</em> deleted as part
 of the purge. These file are the system administrator's creations.
 If you want to get rid of them, run
-<code class="shell">rm -f /etc/twisted-web/local.d/*</code>.</p>
+<code class="shell">rm -f /etc/wubwubwub/local.d/*</code>.</p>
 
 <h2>Checking Configuration</h2>
 
@@ -233,6 +233,6 @@ If you want to get rid of them, run
 <code>twconfcheck</code>. This program, which can be run as a regular user,
 will execute the configuration and check the application object
 for simple mistakes. This will increase signifcantly that a
-<code>invoke-rc.d twisted-web restart</code> will succeed.</p>
+<code>invoke-rc.d wubwubwub restart</code> will succeed.</p>
 
 </body></html>

@@ -1,7 +1,7 @@
 import glob
 
 # If you do not want to modify this file directly, most modifications
-# can be done via putting a Python file in /etc/twisted-web/local.d
+# can be done via putting a Python file in /etc/wubwubwub/local.d
 # This file will have access to root, default, site and application and
 # can call any method or change any attribute on them.
 #
@@ -11,7 +11,7 @@ import glob
 dictionary = {'root': root, 'site': site, 'application': application,
               'default': default}
 for dir in ('package.d', 'local.d'):
-    files = glob.glob("/etc/twisted-web/%s/*.py" % dir)
+    files = glob.glob("/etc/wubwubwub/%s/*.py" % dir)
     files.sort()
     for file in files:
         execfile(file, dictionary)

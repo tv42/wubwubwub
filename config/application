@@ -8,6 +8,6 @@ gid = grp.getgrnam(groupname)[2]
 # Generate the Application.
 application = service.Application("web", uid=uid, gid=gid)
 # Listen on all ports specified:
-for line in open("/etc/twisted-web/ports"):
+for line in open("/etc/wubwubwub/ports"):
     s = strports.service(line.rstrip(), site)
     s.setServiceParent(service.IServiceCollection(application))

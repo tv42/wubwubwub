@@ -60,7 +60,7 @@ def system(cmd):
 
 
 def confdir(*names):
-    return os.path.join('/etc/twisted-web', *names)
+    return os.path.join('/etc/wubwubwub', *names)
 
 
 def a2confdir(*names):
@@ -68,7 +68,7 @@ def a2confdir(*names):
 
 
 def setPorts(newPort):
-    currentPorts = map(int, open('/etc/twisted-web/ports').read().split())
+    currentPorts = map(int, open('/etc/wubwubwub/ports').read().split())
     if 80 in currentPorts:
         currentPorts.remove(80)
         open(confdir('disable'), 'w').close()
@@ -91,7 +91,7 @@ def configureSystem(force, apache, port, vhost, apache_port):
     writeFile(confdir('local.d/02vhostmonster.py'), file02vhostmonster, force)
     if apache:
         addApacheVhost(vhost, apache_port, force)
-    for service in ['twisted-web']+apache*['apache2']:
+    for service in ['wubwubwub']+apache*['apache2']:
         system('invoke-rc.d %s restart' % service)
 
 

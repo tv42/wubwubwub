@@ -2,7 +2,7 @@
 
 export DH_COMPAT=3
 
-DIR=debian/twisted-web
+DIR=debian/wubwubwub
 
 build: build-stamp
 build-stamp:
@@ -26,21 +26,21 @@ install-stamp: build-stamp
 	dh_installdirs
 	dh_installdebconf
 	dh_installman man/rptwisted.8 man/twconfcheck.8
-	install -m 644 config/ports config/user config/twisted-web \
+	install -m 644 config/ports config/user config/wubwubwub \
 	               config/default config/root config/site \
 	               config/application config/directories \
-	               ${DIR}/etc/twisted-web/
-	install -m 755 debian/init.d ${DIR}/etc/init.d/twisted-web
-	install -m 644 debian/default ${DIR}/etc/default/twisted-web
+	               ${DIR}/etc/wubwubwub/
+	install -m 755 debian/init.d ${DIR}/etc/init.d/wubwubwub
+	install -m 644 debian/default ${DIR}/etc/default/wubwubwub
 	install -m 644 debian/copyright README README.xhtml stylesheet.css \
-	               ${DIR}/usr/share/doc/twisted-web/
-	install -m 644 examples/*.py ${DIR}/usr/share/doc/twisted-web/examples/
-	chgrp www-data ${DIR}/var/log/twisted-web
-	install -m 644 debian/changelog ${DIR}/usr/share/doc/twisted-web/
-	gzip -9 ${DIR}/usr/share/doc/twisted-web/changelog
-	chmod 770 ${DIR}/var/log/twisted-web
+	               ${DIR}/usr/share/doc/wubwubwub/
+	install -m 644 examples/*.py ${DIR}/usr/share/doc/wubwubwub/examples/
+	chgrp www-data ${DIR}/var/log/wubwubwub
+	install -m 644 debian/changelog ${DIR}/usr/share/doc/wubwubwub/
+	gzip -9 ${DIR}/usr/share/doc/wubwubwub/changelog
+	chmod 770 ${DIR}/var/log/wubwubwub
 	install -m 755 bin/rptwisted bin/twconfcheck ${DIR}/usr/sbin/
-	touch ${DIR}/usr/share/twisted-web/package-installed
+	touch ${DIR}/usr/share/wubwubwub/package-installed
 	touch install-stamp
 
 binary-arch: build install

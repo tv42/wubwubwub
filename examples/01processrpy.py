@@ -1,6 +1,6 @@
 # Add .rpy support to the default web site.
 # 
-# To use this file, cp 01processrpy.py /etc/twisted-web/local.d
+# To use this file, cp 01processrpy.py /etc/wubwubwub/local.d
 #
 from twisted.web import script, static
 

@@ -2,7 +2,7 @@
 # may have the wrong idea about its hostname/port. Since this
 # information belongs in the reverse proxy configuration, it should
 # be transmitted in the URL.
-# After copyring this file to /etc/twisted-web/local.d/, configure
+# After copyring this file to /etc/wubwubwub/local.d/, configure
 # the reverse proxy to translate:
 # http://example.com/foo/bar/baz.html to
 # http://internal-host/vhost/http/example.com/foo/bar/baz.html

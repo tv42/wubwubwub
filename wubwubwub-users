@@ -8,8 +8,8 @@ def readUsers(fname, default=()):
     return sets.Set(default)
 
 allUsers = [entry[0] for entry in pwd.getpwall()]
-users = (readUsers("/etc/twisted-web/twisted-web-users.allow", allUsers) - 
-         readUsers("/etc/twisted-web/twisted-web-users.deny"))
+users = (readUsers("/etc/wubwubwub/wubwubwub-users.allow", allUsers) - 
+         readUsers("/etc/wubwubwub/wubwubwub-users.deny"))
 
 processMonitor = procmon.ProcessMonitor()
 for user in users:
@@ -19,5 +19,5 @@ for user in users:
     command = ['/bin/sh', '-c', 'cd %s;./.twisted-command' % homeDir]
     processMonitor.addProcess(user, command, uid, gid)
 
-application = service.Application("twisted-web-users", 0, 0)
+application = service.Application("wubwubwub-users", 0, 0)
 processMonitor.setServiceParent(application)

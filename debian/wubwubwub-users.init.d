@@ -1,29 +1,29 @@
 #!/bin/sh
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-pidfile=/var/run/twisted-web-users.pid
-rundir=/var/lib/twisted-web/
-file=/etc/twisted-web/twisted-web-users
+pidfile=/var/run/wubwubwub-users.pid
+rundir=/var/lib/wubwubwub/
+file=/etc/wubwubwub/wubwubwub-users
 more_args=--no_save
 
-[ -r /etc/default/twisted-web-users ] && . /etc/default/twisted-web-users
+[ -r /etc/default/wubwubwub-users ] && . /etc/default/wubwubwub-users
 
 test -x /usr/bin/twistd2.3 || exit 0
 test -r $file || exit 0
-test -r /usr/share/twisted-web/package-installed || exit 0
+test -r /usr/share/wubwubwub/package-installed || exit 0
 
 
 case "$1" in
     start)
-        echo -n "Starting twisted-web-users: process-manager"
+        echo -n "Starting wubwubwub-users: process-manager"
         start-stop-daemon --start --quiet --exec /usr/bin/twistd2.3 --  \
                           --pidfile=$pidfile --rundir=$rundir --python=$file\
-                          --syslog --prefix=twisted-web-users --quiet $more_args
+                          --syslog --prefix=wubwubwub-users --quiet $more_args
         echo "."	
     ;;
 
     stop)
-        echo -n "Stopping twisted-web-users: process-manager"
+        echo -n "Stopping wubwubwub-users: process-manager"
         start-stop-daemon --stop --quiet --pidfile $pidfile
         echo "."	
     ;;
@@ -38,7 +38,7 @@ case "$1" in
     ;;
 
     *)
-        echo "Usage: /etc/init.d/twisted-web-users {start|stop|restart|force-reload}" >&2
+        echo "Usage: /etc/init.d/wubwubwub-users {start|stop|restart|force-reload}" >&2
         exit 1
     ;;
 esac

@@ -4,6 +4,6 @@ set -e
 #DEBHELPER#
 
 if [ "$1" = "purge" ]; then
-	rm -f /etc/twisted-web/disable
+	rm -f /etc/wubwubwub/disable
 fi
-invoke-rc.d twisted-web stop
+invoke-rc.d wubwubwub stop

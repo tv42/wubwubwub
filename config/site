@@ -6,7 +6,7 @@ from twisted.protocols import http
 # compatible logfiles are useful because there are quite a few programs
 # which analyse them and display statistics. 
 #logPath = None
-logPath = '/var/log/twisted-web/access.log'
+logPath = '/var/log/wubwubwub/access.log'
 
 # Generate the Site factory. You will not normally
 # want to modify this line.

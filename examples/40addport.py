@@ -9,6 +9,6 @@ indexNames = default.indexNames
 resource = static.File(os.path.join(directory))
 site = server.Site(resource,
 # Uncomment if you want logging
-#logPath='/var/log/twisted-web/ncsa.81'
+#logPath='/var/log/wubwubwub/ncsa.81'
 )
 application.listenTCP(81, site)

@@ -1,4 +1,4 @@
-pidfile=/var/run/twisted-web.pid
-rundir=/var/lib/twisted-web/
-file=/etc/twisted-web/twisted-web
+pidfile=/var/run/wubwubwub.pid
+rundir=/var/lib/wubwubwub/
+file=/etc/wubwubwub/wubwubwub
 more_args=--no_save 

@@ -1,7 +1,7 @@
 #!/usr/bin/python2.3
 import sys
 
-FILE="/etc/twisted-web/twisted-web"
+FILE="/etc/wubwubwub/wubwubwub"
 d = {}
 execfile(FILE, d)
 if not d.has_key('application'):

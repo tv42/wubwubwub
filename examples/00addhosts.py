@@ -1,7 +1,7 @@
 # Add all hosts in a given directory as virtual hosts.
 # In order to use this, change '/var/www/vhost' to the directory
 # in which you keep the files for the virtual hosts and copy this file to
-# /etc/twisted-web/local.d
+# /etc/wubwubwub/local.d
 #
 from twisted.web import static
 import os

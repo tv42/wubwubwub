@@ -1,5 +1,5 @@
 # In order to add a custom virtual host, copy this file into
-# /etc/twisted-web/local.d/05add<host name>.py, change
+# /etc/wubwubwub/local.d/05add<host name>.py, change
 # "example.com" and "/var/www/example" to the hostname and
 # directory you want, and change the various settings as per
 # the comments.

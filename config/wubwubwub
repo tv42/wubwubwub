@@ -1,25 +1,25 @@
 # For more information and general comments on editing this file
-# please refer to /usr/share/doc/twisted-web/README
+# please refer to /usr/share/doc/wubwubwub/README
 # Instead of editing this files, most changes can be done via adding
-# files to /etc/twisted-web/local.d
+# files to /etc/wubwubwub/local.d
 # Refer to README for more details.
 # 
 d = {}
-execfile("/etc/twisted-web/default", d)
+execfile("/etc/wubwubwub/default", d)
 default = d['default']
 d = {'default': default}
-execfile("/etc/twisted-web/root", d)
+execfile("/etc/wubwubwub/root", d)
 root = d['root']
 d = {'default': default, 'root': root}
-execfile("/etc/twisted-web/site", d)
+execfile("/etc/wubwubwub/site", d)
 site = d['site']
 d = {'default': default, 'root': root, 'site': site}
-execfile("/etc/twisted-web/user", d)
+execfile("/etc/wubwubwub/user", d)
 username, groupname = d['username'], d['groupname']
 d = {'default': default, 'root': root, 'site': site,
      'username': username, 'groupname': groupname}
-execfile("/etc/twisted-web/application", d)
+execfile("/etc/wubwubwub/application", d)
 application = d['application']
 d = {'default': default, 'root': root, 'site': site, 'application': application,
      'username': username, 'groupname': groupname}
-execfile("/etc/twisted-web/directories", d)
+execfile("/etc/wubwubwub/directories", d)

@@ -1,11 +1,11 @@
-Source: twisted-web
+Source: wubwubwub
 Section: net
 Priority: extra
 Maintainer: Moshe Zadka <moshez@debian.org>
 Build-Depends-Indep: debhelper (>= 4.1.16), python2.3-twisted, po-debconf, lynx
 Standards-Version: 3.5.7
 
-Package: twisted-web
+Package: wubwubwub
 Architecture: all
 Depends: python2.3, python2.3-twisted (>= 1.0.5), python2.3-nevow (>= 0.3.0), debconf
 Provides: httpd
