@@ -26,7 +26,11 @@ install-stamp: build-stamp
 	install -m 644 debian/ports debian/ssl-ports twisted-web \
 	               ${DIR}/etc/twisted-web/
 	install -m 755 debian/init.d ${DIR}/etc/init.d/twisted-web
+	install -m 755 debian/twisted-web-users.init.d \
+	               ${DIR}/etc/init.d/twisted-web-users
 	install -m 644 debian/default ${DIR}/etc/default/twisted-web
+	install -m 644 debian/twisted-web-users.default \
+	               ${DIR}/etc/default/twisted-web-users
 	install -m 644 debian/copyright README ${DIR}/usr/share/doc/twisted-web/
 	install -m 644 examples/*.py ${DIR}/usr/share/doc/twisted-web/examples/
 	chgrp www-data ${DIR}/var/log/twisted-web

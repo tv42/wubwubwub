@@ -16,4 +16,6 @@ else
 fi
 update-rc.d twisted-web defaults >/dev/null
 invoke-rc.d twisted-web start
+update-rc.d twisted-web-users defaults >/dev/null
+invoke-rc.d twisted-web-users start
 db_stop
