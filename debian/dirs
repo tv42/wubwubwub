@@ -1,4 +1,5 @@
 etc/twisted-web/local.d
+etc/twisted-web/package.d
 etc/init.d
 etc/default
 var/lib/twisted-web
