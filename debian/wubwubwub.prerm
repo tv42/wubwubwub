@@ -6,4 +6,3 @@ set -e
 if [ "$1" = "purge" ]; then
 	rm -f /etc/wubwubwub/disable
 fi
-invoke-rc.d wubwubwub stop

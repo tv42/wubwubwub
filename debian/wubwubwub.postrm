@@ -3,9 +3,6 @@ set -e
 
 #DEBHELPER#
 
-. /usr/share/debconf/confmodule
 if [ "$1" = purge ]; then
 	rm -f /etc/wubwubwub/disable
-        update-rc.d wubwubwub remove >/dev/null
-	db_purge
 fi

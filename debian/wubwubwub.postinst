@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-#DEBHELPER#
-
 . /usr/share/debconf/confmodule 
 
 if [ -r /etc/wubwubwub/disable ]; then
@@ -16,6 +14,7 @@ else
 		touch /etc/wubwubwub/disable 
 	fi;
 fi
-update-rc.d wubwubwub defaults >/dev/null
-invoke-rc.d wubwubwub start
+
+#DEBHELPER#
+
 db_stop
