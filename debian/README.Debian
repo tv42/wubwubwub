@@ -16,3 +16,6 @@ you change /etc/twisted-web/disable to be empty. You should do this after
 changing the configuration of Twisted-Web to listen on some other port, or
 changing the configuration of the other server. After undisabling Twisted-Web,
 run the command "invoke-rc.d twisted-web" to start the server manually.
+
+rptwisted exists to run Twisted on an out-of-the-way port and prepare it
+to be a reverse proxy.

@@ -2,6 +2,8 @@
 
 export DH_COMPAT=3
 
+DIR=debian/twisted-web
+
 build: build-stamp
 build-stamp:
 	dh_testdir
@@ -20,17 +22,17 @@ install-stamp: build-stamp
 	dh_clean -k
 	dh_installdirs
 	dh_installdebconf
-
-	# Add here commands to install the package into debian/twisted-web.
-	install -m 644 twisted-web debian/twisted-web/etc/twisted-web/
-	install -m 755 debian/init.d debian/twisted-web/etc/init.d/twisted-web
-	install -m 644 debian/default debian/twisted-web/etc/default/twisted-web
+	dh_installman rptwisted.8
+	install -m 644 twisted-web ${DIR}/etc/twisted-web/
+	install -m 755 debian/init.d ${DIR}/etc/init.d/twisted-web
+	install -m 644 debian/default ${DIR}/etc/default/twisted-web
 	install -m 644 debian/copyright README.mod_proxy debian/README.Debian \
-                   debian/twisted-web/usr/share/doc/twisted-web/
-	install -d debian/twisted-web/usr/share/doc/twisted-web/examples/
-	install -m 644 examples/*.py \
-	           debian/twisted-web/usr/share/doc/twisted-web/examples/
-	touch debian/twisted-web/usr/share/twisted-web/package-installed
+                   ${DIR}/usr/share/doc/twisted-web/
+	install -m 644 examples/*.py ${DIR}/usr/share/doc/twisted-web/examples/
+	chgrp www-data ${DIR}/var/log/twisted-web
+	chmod 770 ${DIR}/var/log/twisted-web
+	install -m 755 rptwisted ${DIR}/usr/sbin/
+	touch ${DIR}/usr/share/twisted-web/package-installed
 	touch install-stamp
 
 binary-arch: build install
@@ -38,12 +40,9 @@ binary-arch: build install
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	dh_strip
 	dh_compress
 	dh_installchangelogs
-	dh_fixperms
 	dh_installdeb
-	dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

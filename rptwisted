@@ -16,6 +16,10 @@ class Options(usage.Options):
                 ['force', 'f', 'Overwrite existing configuration files']
                ]
 
+    def opt_version(self):
+        print "rptwisted: version 0.16"
+	sys.exit()
+
 
 header='''\
 ####
@@ -23,7 +27,7 @@ header='''\
 ####
 '''
 
-file02addvhost='''\
+file02vhostmonster='''\
 from twisted.web import vhost
 root.default.putChild('vhost', vhost.VHostMonsterResource())
 '''
@@ -55,31 +59,45 @@ def writeFile(name, content, force):
     fp.close()
     os.rename(name+'-', name)
 
+def system(cmd):
+    r = os.system(cmd)
+    if r != 0:
+        raise OSError("command returned non-zero: %d" % r)
+
+def confdir(*names):
+    return os.path.join('/etc/twisted-web', *names)
+
+def a2confdir(*names):
+    return os.path.join('/etc/apache2', *names)
 
 def main():
     opt = Options()
-    try:
-        opt.parseOptions()
-    except usage.UsageError:
-        sys.exit("%s: wrong usage. use --help for help" % 
-	         os.path.basename(sys.argv[0]))
-    writeFile('/etc/twisted-web/02addvhost.py', file02addvhost, opt['force'])
-    writeFile('/etc/twisted-web/50changeport.py', file50changeport % opt,
-              opt['force'])
+    opt.parseOptions()
+    force = opt['force']
+    writeFile(confdir('local.d/02vhostmonster.py', file02vhostmonster, force)
+    writeFile(confdir('local.d/50changeport.py', file50changeport % opt, force)
     if opt['apache']:
-        if not os.path.exists('/etc/apache2/mods-enabled/proxy.load'):
-            os.system('a2enmod proxy')
-        writeFile('/etc/apache2/sites-available/%(vhost)s-%(apache-port)s'%opt,
-                  apacheConfig % opt, opt['force'])
-	os.symlink('../sites-available/%(vhost)s-%(apache-port)s' % opt,
-	           '/etc/apache2/sites-enabled/%(vhost)s-%(apache-port)s'%opt)
+        fname = '%(vhost)s-%(apache-port)s' % opt
+        if not os.path.exists(a2confdir('mods-enabled/proxy.load')):
+            system('a2enmod proxy')
+        writeFile(a2confdir('sites-available', fname), apacheConfig % opt,force)
+	os.symlink('../sites-available/'+fname,
+	           a2confdir('sites-enabled', fname))
         # ????
         # What should I write to
         # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
-    open('/etc/twisted-web/disabled', 'w').close()
-    os.system('invoke-rc.d twisted-web restart')
+    open(confdir('disabled', 'w').close()
+    system('invoke-rc.d twisted-web restart')
     if opt['apache']:
-        os.system('invoke-rc.d apache2 reload')
+        system('invoke-rc.d apache2 reload')
+
+def run()
+    try:
+        main()
+    except (IOError, OSError), e:
+        sys.exit(str(e))
+    except usage.UsageError, e:
+        sys.exit(str(e))
 
 if __name__ == '__main__':
-    main()
+    run()
