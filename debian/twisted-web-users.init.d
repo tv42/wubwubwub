@@ -15,7 +15,7 @@ case "$1" in
         for user in $users;
             do home=`getent passwd $user|awk -F: '{print $6}'`
             command=$home/.twistd-command
-            (cd $home;su $user $command --pidfile=$home/.twistd.pid)
+            (cd $home && su $user $command --pidfile=$home/.twistd.pid)
             echo -n "$user "
         done
         echo "Done."	
