@@ -87,6 +87,23 @@ on this configuration, and may not work effectively if it is disabled.
 Note that if you enable any of the ssl-ports, you should install
 python2.2-pyopenssl for them to work correctly.
 
+Conffiles
+---------
+
+In case you do want to modify the package's conffiles, note that they
+have been paritioned into logical pieces. /etc/twisted-web/twisted-web
+is the master configuration, which loads all others. It should rarely,
+if ever, be modified.
+
+The configuration loads the following files:
+- /etc/twisted-web/default: create the default web site
+- /etc/twisted-web/root: create the root site (as a virtual hosted site)
+- /etc/twisted-web/site: create the Site factory
+- /etc/twisted-web/application: create the application object, listen on ports
+- /etc/twisted-web/directories: read the scripts inside
+                                /etc/twisted-web/package.d and
+                                /etc/twisted-web/local.d
+
 Dynamic User Pages
 ------------------
 
@@ -140,6 +157,14 @@ possible to cache the ResourceSubscriber in the registry. For more
 information about writing resources, see the using-twistedweb.xhtml document
 in twisted-doc. Note that starting and stopping your server is still
 your responsibility.
+
+
+Packages Wanting to Modify the Configuration
+--------------------------------------------
+
+/etc/twisted-web/package.d is designed for packages to drop in their
+configurations. For example, a package installing itself in a non-standard
+location may use this to add its directory to sys.path.
 
 
 Purging Twisted-Web
