@@ -84,6 +84,9 @@ on them is in /etc/twisted-web/twisted-web, so it is possible to disable
 it. Note, however, that programs such as rptwisted (described below) depend
 on this configuration, and may not work effectively if it is disabled.
 
+Note that if you enable any of the ssl-ports, you should install
+python2.2-pyopenssl for them to work correctly.
+
 Dynamic User Pages
 ------------------
 
