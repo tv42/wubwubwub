@@ -1,6 +1,9 @@
 In order to avoid modifying the configuration files so maintainer updates
 can happen smoothly, please put local configuration files in
 /etc/twisted-web/local.d
+All .py files in this directory are evaluated according to lexical order.
+It is recommended files will begin with two digits to set the order.
+All example drop-in configuation files follow this convention.   
 
 If some other program is running on port 80 Twisted-Web will be disabled until
 you change /etc/twisted-web/disable to be empty. You should do this after
