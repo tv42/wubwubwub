@@ -3,8 +3,11 @@ twisted-web (0.19) unstable; urgency=low
   * More examples
   * Make /~user/ work.
   * Document the configuration's design decisions and rationale
+  * Add comments to explain new extension ignorage
+  * Changed to new way of passing "default"
+  * Updated examples
 
- -- Moshe Zadka <moshez@debian.org>  Fri, 22 Nov 2002 08:27:18 -0600
+ -- Moshe Zadka <moshez@debian.org>  Sun, 24 Nov 2002 23:45:48 -0600
 
 twisted-web (0.18) unstable; urgency=low
 
