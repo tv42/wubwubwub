@@ -28,7 +28,7 @@ install-stamp: build-stamp
 	install -m 644 debian/copyright debian/README.Debian \
                    debian/twisted-web/usr/share/doc/twisted-web/
 	install -d debian/twisted-web/usr/share/doc/twisted-web/examples/
-	install -m 644 00addhosts.py \
+	install -m 644 examples/*.py \
 	           debian/twisted-web/usr/share/doc/twisted-web/examples/
 	touch debian/twisted-web/usr/share/twisted-web/package-installed
 	touch install-stamp
