@@ -1,0 +1,9 @@
+In order to avoid modifying the configuration files so maintainer updates
+can happen smoothly, please put local configuration files in
+/etc/twisted-web/local.d
+
+If some other program is running on port 80 Twisted-Web will be disabled until
+you change /etc/twisted-web/disable to be empty. You should do this after
+changing the configuration of Twisted-Web to listen on some other port, or
+changing the configuration of the other server. After undisabling Twisted-Web,
+run the command "invoke-rc.d twisted-web" to start the server manually.

@@ -1,0 +1,62 @@
+twisted-web (0.12) unstable; urgency=low
+
+  * Add 00addhosts.py to the examples directory
+
+ -- Moshe Zadka <moshez@debian.org>  Wed, 13 Nov 2002 02:21:15 -0600
+
+twisted-web (0.11) unstable; urgency=low
+
+  * usr/share/cgi-bin -> usr/bin/cgi-bin
+
+ -- Moshe Zadka <moshez@debian.org>  Tue, 12 Nov 2002 23:23:55 -0600
+
+twisted-web (0.10) unstable; urgency=low
+
+  * Adding a db_stop to postinst in a somewhat desperate attempt 
+
+ -- Moshe Zadka <moshez@debian.org>  Tue, 12 Nov 2002 23:15:29 -0600
+
+twisted-web (0.9) unstable; urgency=low
+
+  * IRC Sucks -- remove extra character from command line 
+
+ -- Moshe Zadka <moshez@debian.org>  Tue, 12 Nov 2002 00:23:03 -0600
+
+twisted-web (0.8) unstable; urgency=low
+
+  * explicitly exiting in postinst
+
+ -- Moshe Zadka <moshez@debian.org>  Mon, 11 Nov 2002 10:21:53 -0600
+
+twisted-web (0.7) unstable; urgency=low
+
+  * Fix configuration file name
+  * Fix configuration to not crash and burn
+
+ -- Moshe Zadka <moshez@debian.org>  Mon, 11 Nov 2002 10:02:56 -0600
+
+twisted-web (0.6) unstable; urgency=low
+
+  * Add ugly stuff for detection of another running port-80 grabber and
+  disabling of server in that case.
+
+ -- Moshe Zadka <moshez@debian.org>  Mon, 11 Nov 2002 04:48:21 -0600
+
+twisted-web (0.5) unstable; urgency=low
+
+  * Make NameVirtualHost always be the root. 
+
+ -- Moshe Zadka <moshez@debian.org>  Mon, 11 Nov 2002 00:33:29 -0600
+
+twisted-web (0.4) unstable; urgency=low
+
+  * Many improvements to the default config file 
+
+ -- Moshe Zadka <moshez@debian.org>  Sun, 10 Nov 2002 06:47:38 -0600
+
+twisted-web (0.3) unstable; urgency=low
+
+  * Using the new and improved template configuration file
+
+ -- Moshe Zadka <moshez@debian.org>  Sun, 10 Nov 2002 02:33:11 -0600
+

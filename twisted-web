@@ -1,0 +1,112 @@
+from twisted.web import script, static, server, distrib, twcgi, vhost
+from twisted.internet import app
+import pwd, grp, glob
+import glob
+
+# The root of the HTTP hierarchy
+root = static.File('/var/www')
+
+# The default processors in Twisted, by file extension.
+# These make some file extensions not being sent to the user,
+# but rather evaluated in various ways.
+#
+# Do *NOT* turn any of this on if untrusted users can put files
+# in the document hierarchy.
+root.processors = {
+#    '.cgi': twcgi.CGIScript,
+#    '.php3': twcgi.PHP3Script,
+#    '.php': twcgi.PHPScript,
+#    '.epy': script.PythonScript,
+#    '.rpy': script.ResourceScript,
+#    '.trp': trp.ResourceUnpickler,
+}
+
+# Uncomment this if you want to support a users/ directory
+# http://host/users/fred/foo/bar.html will map to
+# ~fred/public_html/foo/bar.html
+#
+root.putChild('users', distrib.UserDirectory())
+
+# Comment this if you don't want /cgi-bin/ to execute CGI programs
+root.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
+
+# Comment this if you don't want to serve the Debian /usr/share/doc
+# as part of your server
+root.putChild('doc', static.File('/usr/share/doc'))
+
+# Change this if you want default mime-type to be different:
+# root.defaultType = 'text/html'
+
+# Add more mime-types
+root.contentTypes = root.contentTypes.copy()
+# root.contentTypes['extension'] = 'mime/type'
+
+# Uncomment this so /path/to/foo can serve /path/to/foo.bar
+# root.allowExt = 1
+
+# Add more indexes
+# http://host/foo/ will serve index.html, index.rpy or index.php,
+# the first which exists.
+# If none exist, it will generate a directory listing.
+#
+root.indexNames = [
+    'index.html',
+#     'index.rpy',
+#     'index.php',
+]
+
+# set logfile name.
+# This is the *Apache compatible* log file, not the twisted-style logfile.
+# Leaving this as None will have no Apache compatible log file. Apache
+# compatible logfiles are useful because there are quite a few programs
+# which analyse them and display statistics. 
+logPath = None
+
+# Allow the requestor to tell us which host we are
+# root.putChild('vhost', vhost.VHostMonsterResource())
+
+# Make sure it is easy to add new virtual hosts:
+newRoot = vhost.NameVirtualHost()
+newRoot.default = root
+root = newRoot
+
+# To add virtual hosts
+#
+# exampleRoot = static.File('/var/vhosts/example')
+# root.addHost('example.com', exampleRoot)
+
+
+# Generate the Site factory. You will not normally
+# want to modify this line.
+site = server.Site(root, logPath=logPath)
+
+# Set user/group to run under
+# Usually, it runs under the www-data user and group.
+uid = pwd.getpwnam('www-data')[2]
+gid = grp.getgrnam('www-data')[2]
+
+
+# Generate the Application. You will not normally
+# want to modify this line.
+application = app.Application("web", uid=uid, gid=gid)
+
+# Listen on port.
+# Usually, listening on port 80 is the correct thing.
+application.listenTCP(80, site)
+
+# Uncomment to support https
+# application.listenSSL(443, site, 'server.pem', 'server.pem')
+
+# If you do not want to modify this file directly, most modifications
+# can be done via putting a Python file in /etc/twisted-web/local.d
+# This file will have access to root, site and application and
+# can call any method or change any attribute on them.
+#
+# If you want to change the root itself, "root=something" will not
+# have the desired effect. Instead, use site.resource=something
+#
+dictionary = {'root': root, 'site': site, 'application': application}
+files = glob.glob("/etc/twisted-web/local.d/*.py")
+files.sort()
+for file in files:
+    execfile(file, dictionary)

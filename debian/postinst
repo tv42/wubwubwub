@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule 
+
+if [ -r /etc/twisted-web/disable ]; then
+	:
+else
+	if [ -n "`netstat -plunt | awk '{print $4}' | grep ':80$'`" ]; then
+		echo "exit 0" > /etc/twisted-web/disable
+		db_input high twisted-web/cant-bind || true 
+		db_go || true
+	else
+		touch /etc/twisted-web/disable 
+	fi;
+fi
+update-rc.d twisted-web defaults >/dev/null
+invoke-rc.d twisted-web start
+db_stop

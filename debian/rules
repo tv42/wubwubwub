@@ -1,0 +1,55 @@
+#!/usr/bin/make -f
+
+export DH_COMPAT=3
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp install-stamp
+	dh_clean
+
+install: install-stamp
+install-stamp: build-stamp
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	dh_installdebconf
+
+	# Add here commands to install the package into debian/twisted-web.
+	install -m 644 twisted-web debian/twisted-web/etc/twisted-web/
+	install -m 755 debian/init.d debian/twisted-web/etc/init.d/twisted-web
+	install -m 644 debian/default debian/twisted-web/etc/default/twisted-web
+	install -m 644 debian/copyright debian/README.Debian \
+                   debian/twisted-web/usr/share/doc/twisted-web/
+	install -d debian/twisted-web/usr/share/doc/twisted-web/examples/
+	install -m 644 00addhosts.py \
+	           debian/twisted-web/usr/share/doc/twisted-web/examples/
+	touch debian/twisted-web/usr/share/twisted-web/package-installed
+	touch install-stamp
+
+binary-arch: build install
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_strip
+	dh_compress
+	dh_installchangelogs
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install
