@@ -21,7 +21,7 @@ root.processors = {
 #    '.trp': trp.ResourceUnpickler,
 }
 
-# Uncomment this if you want to support a users/ directory
+# Comment this if you don't want to support a users/ directory
 # http://host/users/fred/foo/bar.html will map to
 # ~fred/public_html/foo/bar.html
 #

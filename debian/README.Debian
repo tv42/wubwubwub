@@ -5,6 +5,9 @@ All .py files in this directory are evaluated according to lexical order.
 It is recommended files will begin with two digits to set the order.
 All example drop-in configuation files follow this convention.   
 
+Drop-in configuration files are evaluated inside a dictionary consisting
+of 'root', 'site' and 'application'.
+
 If some other program is running on port 80 Twisted-Web will be disabled until
 you change /etc/twisted-web/disable to be empty. You should do this after
 changing the configuration of Twisted-Web to listen on some other port, or
