@@ -2,7 +2,7 @@ etc/twisted-web/local.d
 etc/init.d
 etc/default
 var/lib/twisted-web
-usr/lib/rpy-bin
+usr/lib/rpy-lib
 usr/share/twisted-web
 usr/share/doc/twisted-web
 usr/share/doc/twisted-web/examples

@@ -128,14 +128,14 @@ Remember to symlink it to sites-enabled, and restart Apache2!
 Packages Containing Resources
 -----------------------------
 
-/usr/lib/rpy-bin is served as a ResourceScriptDirectory -- anything in
+/usr/lib/rpy-lib is served as a ResourceScriptDirectory -- anything in
 it is assumed to be a ResourceScript, and will be served as such.
 If your package has a Resource it wants to serve, Depend: on twisted-web,
 and drop your ResourceScript (which does *not* have to be named .rpy)
-in /usr/lib/rpy-bin. In particular if your package wants to serve a portion
+in /usr/lib/rpy-lib. In particular if your package wants to serve a portion
 of the web site, perhaps as a different user, use ResourcePublisher to
 listen on a socket somewhere on /var/run, and have a ResourceSubscriber
-in a ResourceScript which is then dropped in /usr/lib/rpy-bin. It is
+in a ResourceScript which is then dropped in /usr/lib/rpy-lib. It is
 possible to cache the ResourceSubscriber in the registry. For more
 information about writing resources, see the using-twistedweb.xhtml document
 in twisted-doc. Note that starting and stopping your server is still

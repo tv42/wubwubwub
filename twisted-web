@@ -35,7 +35,7 @@ default.putChild('users', distrib.UserDirectory())
 
 # Comment this if you don't want /cgi-bin/ to execute CGI programs
 default.putChild('cgi-bin', twcgi.CGIDirectory('/usr/lib/cgi-bin'))
-default.putChild('rpy-bin', script.ResourceScriptDirectory('/usr/lib/rpy-bin'))
+default.putChild('rpy-lib', script.ResourceScriptDirectory('/usr/lib/rpy-lib'))
 
 # Comment this if you don't want to serve the Debian /usr/share/doc
 # as part of your server
