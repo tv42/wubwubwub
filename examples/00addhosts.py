@@ -6,9 +6,19 @@
 from twisted.web import static
 import os
 
+# Directory where the virtual hosts are kept
 vhostDir = '/var/www/vhost/'
+# Whether to add www.<vhost> as alias for <vhost>
+addWWW = 0
+
+# Change this if you want to use other processors or indexNames
+processors = default.processors
+indexNames = default.indexNames
 
 for file in os.listdir(vhostDir):
-    root.addHost(file, static.File(os.path.join(vhostDir, file)))
-    # If you want www.<host> to point to the same place --
-    #root.addHost('www.'+file, static.File(os.path.join(vhostDir, file)))
+    resource = static.File(os.path.join(vhostDir, file))
+    resource.processors = processors
+    resource.indexNames = indexNames
+    root.addHost(file, resource)
+    if addWWW:
+        root.addHost('www.'+file, resource)
