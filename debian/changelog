@@ -1,3 +1,9 @@
+twisted-web (0.20) unstable; urgency=low
+
+  * Users script now uses ProcessMonitor 
+
+ -- Moshe Zadka <moshez@debian.org>  Fri,  3 Jan 2003 01:16:22 -0600
+
 twisted-web (0.19) unstable; urgency=low
 
   * More examples
