@@ -1,7 +1,7 @@
 # For more information and general comments on editing this file
 # please refer to README.Debian
 # 
-from twisted.web import script, static, server, distrib, twcgi, vhost
+from twisted.web import script, static, server, distrib, twcgi, vhost, rewrite
 from twisted.internet import app
 import pwd, grp, glob
 import glob
@@ -68,9 +68,13 @@ logPath = None
 # Allow the requestor to tell us which host we are
 # default.putChild('vhost', vhost.VHostMonsterResource())
 
+# Add a rule to rewrite /~foo/bar.html to /usrs/foo/bar.html
+# so that the classical user URLs will work.
+default_root = rewrite.RewriterResource(default, rewrite.tildeToUsers)
+
 # Make sure it is easy to add new virtual hosts:
 root = vhost.NameVirtualHost()
-root.default = default
+root.default = default_root
 
 # To add virtual hosts
 #
