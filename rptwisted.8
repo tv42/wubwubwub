@@ -1,0 +1,35 @@
+.TH TWISTED "8" "November 2002" "" "System Commands"
+.SH NAME
+rptwisted \- configure twisted-web to work behind a reverse proxy 
+.SH SYNOPSIS
+.B rptwisted
+[\fIoptions\fR]
+.SH OPTIONS
+.TP
+\fB\-a\fR, \fB\-\-apache\fR
+Add appropriate configuration to apache
+.TP
+\fB\-f\fR, \fB\-\-force\fR
+Overwrite existing configuration files
+.TP
+\fB\-p\fR, \fB\-\-port=\fR
+The new port for Twisted Web to use [default: 8384]
+.TP
+\fB\-v\fR, \fB\-\-vhost=\fR
+The virtual host name
+.TP
+\fB\-c\fR, \fB\-\-apache\-port=\fR
+Port apache is running on [default: 80]
+.HP
+\fB\-\-version\fR
+.TP
+\fB\-\-help\fR
+Display this help and exit.
+.SH DESCRIPTION
+.B rptwisted
+configures twisted-web to work on an alternative port, and to be ready
+to accept the details about the host/port it is accessed from via the URL
+instead of directly.
+.PP
+Optionally, it can also make Apache 2, if installed, be a reverse
+proxy on some virtual host.

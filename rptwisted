@@ -71,7 +71,7 @@ def main():
             os.system('a2enmod proxy')
         writeFile('/etc/apache2/sites-available/%(vhost)s-%(apache-port)s'%opt,
                   apacheConfig % opt, opt['force'])
-	os.symlink('../sites-available/%(vhost)s-%(apache-port)s" % opt,
+	os.symlink('../sites-available/%(vhost)s-%(apache-port)s' % opt,
 	           '/etc/apache2/sites-enabled/%(vhost)s-%(apache-port)s'%opt)
         # ????
         # What should I write to
@@ -80,3 +80,6 @@ def main():
     os.system('invoke-rc.d twisted-web restart')
     if opt['apache']:
         os.system('invoke-rc.d apache2 reload')
+
+if __name__ == '__main__':
+    main()
