@@ -1,61 +1,23 @@
 #!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
 
-export DH_COMPAT=3
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/python-distutils.mk
 
-DIR=debian/wubwubwub
+DEB_DH_ALWAYS_EXCLUDE := .svn
+DEB_PYTHON_COMPILE_VERSION := 2.3
 
-build: build-stamp
-build-stamp:
-	dh_testdir
+build/wubwubwub::
 	lore --null --inputext=.html --config ext=.xhtml
 	lynx -force_html -dump -nolist README.xhtml > README 
-	touch build-stamp
 
-clean:
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp install-stamp
+common-post-build-indep::
+	PYTHONPATH=build/lib trial -R wubwubwub
+
+install/wubwubwub::
+	touch 'debian/wubwubwub/usr/share/wubwubwub/package-installed'
+	chgrp www-data debian/wubwubwub/var/log/wubwubwub
+
+clean::
+	rm -rf _trial_temp
 	rm -f README.xhtml README
-	dh_clean
-
-install: install-stamp
-install-stamp: build-stamp
-	dh_testdir
-	dh_testroot
-	dh_clean -k
-	dh_installdirs
-	dh_installdebconf
-	dh_installman man/wubwubwub-rproxy.8 man/wubwubwub-confcheck.8
-	install -m 644 config/ports config/user config/wubwubwub \
-	               config/default config/root config/site \
-	               config/application config/directories \
-	               ${DIR}/etc/wubwubwub/
-	install -m 755 debian/init.d ${DIR}/etc/init.d/wubwubwub
-	install -m 644 debian/default ${DIR}/etc/default/wubwubwub
-	install -m 644 debian/copyright README README.xhtml stylesheet.css \
-	               ${DIR}/usr/share/doc/wubwubwub/
-	install -m 644 examples/*.py ${DIR}/usr/share/doc/wubwubwub/examples/
-	chgrp www-data ${DIR}/var/log/wubwubwub
-	install -m 644 debian/changelog ${DIR}/usr/share/doc/wubwubwub/
-	gzip -9 ${DIR}/usr/share/doc/wubwubwub/changelog
-	chmod 770 ${DIR}/var/log/wubwubwub
-	install -m 755 bin/wubwubwub-rproxy bin/wubwubwub-confcheck ${DIR}/usr/sbin/
-	touch ${DIR}/usr/share/wubwubwub/package-installed
-	touch install-stamp
-
-binary-arch: build install
-
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_compress
-	dh_installdeb
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-source diff:                                                                  
-	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install

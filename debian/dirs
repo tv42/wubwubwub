@@ -1,13 +1,7 @@
 etc/wubwubwub/local.d
 etc/wubwubwub/package.d
-etc/init.d
-etc/default
 var/lib/wubwubwub
 usr/lib/rpy-lib
 usr/share/wubwubwub
-usr/share/doc/wubwubwub
-usr/share/doc/wubwubwub/examples
 var/log/wubwubwub
-usr/sbin
-usr/share/man/man8
 var/www
