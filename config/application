@@ -1,20 +1,12 @@
+# You will not normally need to modify this file.
 import pwd, grp
-from twisted.internet import app
+from twisted.application import service, strports, 
 
-# Set user/group to run under
-# Usually, it runs under the www-data user and group.
-uid = pwd.getpwnam('www-data')[2]
-gid = grp.getgrnam('www-data')[2]
-
-# Generate the Application. You will not normally
-# want to modify this line.
-application = app.Application("web", uid=uid, gid=gid)
-
+# Calculate user-id and group-id from names
+uid = pwd.getpwnam(username)[2]
+gid = grp.getgrnam(groupname)[2]
+# Generate the Application.
+application = service.Application("web", uid=uid, gid=gid)
 # Listen on all ports specified:
-ports = map(int, open("/etc/twisted-web/ports").read().split())
-ssl_ports = map(int, open("/etc/twisted-web/ssl-ports").read().split())
-
-for port in ports:
-    application.listenTCP(port, site)
-for port in ssl_ports:
-    application.listenSSL(port, site)
+for line in open("/etc/twisted-web/ports"):
+    strports.service(line.rstrip(), site)

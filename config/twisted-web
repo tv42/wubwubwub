@@ -14,7 +14,12 @@ d = {'default': default, 'root': root}
 execfile("/etc/twisted-web/site", d)
 site = d['site']
 d = {'default': default, 'root': root, 'site': site}
+execfile("/etc/twisted-web/user", d)
+username, groupname = d['username'], d['groupname']
+d = {'default': default, 'root': root, 'site': site,
+     'username': username, 'groupname': groupname}
 execfile("/etc/twisted-web/application", d)
 application = d['application']
-d = {'default': default, 'root': root, 'site': site, 'application': application}
+d = {'default': default, 'root': root, 'site': site, 'application': application,
+     'username': username, 'groupname': groupname}
 execfile("/etc/twisted-web/directories", d)
