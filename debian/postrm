@@ -3,6 +3,7 @@ set -e
 
 . /usr/share/debconf/confmodule
 if [ "$1" = purge ]; then
+	rm -f /etc/twisted-web/disable
         update-rc.d twisted-web remove >/dev/null
 	db_purge
 fi
