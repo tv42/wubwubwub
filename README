@@ -1,8 +1,47 @@
 Twisted.Web Debian Package
 ==========================
 
+Our Motto: Making Twisted.Web look like Apache since 2002
+
 Configuration
 -------------
+
+Explanation of Default Configuration
+- - - - - - - - - - - - - - - - - - 
+
+The default's configuration goals are the following, in this order
+
+* Maximum safety - Always err on side of locking down too much, and let the
+  user open up options of dunvious safety.
+* Maximum familiarity - If the choices don't present any inherent danger,
+  configure to be as similar to the standard web server configuration. The
+  Apache configuration being the most thorough is the reason for the motto.
+* Maximum flexibility - As long as it is not unsafe nor too surprising, try
+  to have a configuration which lends as much power to the end user.
+
+The user it runs as (after binding to port 80) is www-data, and the
+group is also www-data.
+
+By default, the configuration is to handle all hostnames to be the same --
+all pointing to /var/www. No "processors" are enabled, so it is possible
+to allow untrusted parties to put files in /var/www without giving them
+the ability to run code as www-data. 
+
+/doc is pointed to /usr/share/doc/, so all the debian documentation is
+served by default (which means, for example, dhelp works).
+
+/cgi-bin is pointed to /usr/lib/cgi-bin/, so third-party packages CGI
+(mailman, man2html) are likewise served.
+
+/users/<name>/ points to the user's public_html directory.
+
+/users/<name>.twistd/ will relay requests to the user personal server,
+if it exists.
+
+/~name/, or /~name.twistd/, function the same as /users/name/ or
+/users/name.twistd/.
+
+Any documents with unrecognized extension are served as text/html.
 
 Modifications and Smooth Upgrades
 - - - - - - - - - - - - - - - - -
