@@ -16,7 +16,7 @@ common-post-build-indep::
 
 install/wubwubwub::
 	touch 'debian/wubwubwub/usr/share/wubwubwub/package-installed'
-	chgrp www-data debian/wubwubwub/var/log/wubwubwub
+	chgrp -R www-data debian/wubwubwub/var/log/wubwubwub
 
 clean::
 	rm -rf _trial_temp

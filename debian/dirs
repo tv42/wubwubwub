@@ -4,4 +4,5 @@ var/lib/wubwubwub
 usr/lib/rpy-lib
 usr/share/wubwubwub
 var/log/wubwubwub
+var/log/wubwubwub/vhost
 var/www

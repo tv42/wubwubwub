@@ -23,9 +23,15 @@ root.default = default
 #logPath = None
 logPath = '/var/log/wubwubwub/access.log'
 
+# Write separate access log files for each virtual host in this
+# directory. Requests with no Host: header still get written to
+# logPath. Set to None to make all requests go to logPath.
+#logDir = None
+logDir = '/var/log/wubwubwub/vhost'
+
 # Generate the Site factory. You will not normally
 # want to modify this line.
-site = VhostLoggingNevowSite(root, logPath=logPath)
+site = VhostLoggingNevowSite(root, logPath=logPath, logDir=logDir)
 
 # Generate the Application.
 application = service.Application("wubwubwub")
