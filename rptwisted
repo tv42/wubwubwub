@@ -51,7 +51,7 @@ ServerAdmin webmaster@%(vhost)s
 
 def writeFile(name, content, force):
     if not force and os.path.exists(name):
-         print "warning: %s exists, not touching"
+         print "warning: %s exists, not touching" % name
          return
     fp = open(name+'-', 'w')
     fp.write(header)
@@ -64,10 +64,8 @@ def system(cmd):
     if r != 0:
         raise OSError("command returned non-zero: %d" % r)
 
-#def confdir(*names):
-#    return os.path.join('/etc/twisted-web', *names)
 def confdir(*names):
-    return os.path.join('.', *names)
+    return os.path.join('/etc/twisted-web', *names)
 
 def a2confdir(*names):
     return os.path.join('/etc/apache2', *names)
