@@ -6,6 +6,7 @@ twisted-web (0.19) unstable; urgency=low
   * Add comments to explain new extension ignorage
   * Changed to new way of passing "default"
   * Updated examples
+  * allow/deny support in twisted-web-users
 
  -- Moshe Zadka <moshez@debian.org>  Sun, 24 Nov 2002 23:45:48 -0600
 
