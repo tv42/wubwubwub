@@ -71,7 +71,7 @@ def setPorts(newPort):
     currentPorts = map(int, open('/etc/twisted-web/ports').read().split())
     if 80 in currentPorts:
         currentPorts.remove(80)
-        open(confdir('disabled'), 'w').close()
+        open(confdir('disable'), 'w').close()
     if newPort not in currentPorts:
         currentPorts.append(newPort)
     writeFile(confdir('ports'), '\n'.join(map(str, currentPorts))+'\n', 1, 0)
