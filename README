@@ -114,6 +114,11 @@ with the --personal argument, and then start the server with
 twistd2.2 -f ~/web.tap
 '''
 
+Starting servers can be done with crontab and a line like:
+'''
+@reboot cd $HOME;twistd2.2 -f ~/web.tap
+'''
+
 Reverse Proxy Configuration
 ---------------------------
 
