@@ -9,3 +9,5 @@ from wubwubwub import config
 
 for fname in ['default', 'root', 'application', 'directories']:
     execfile(os.path.join('/etc/wubwubwub', fname), {})
+
+application = config.application

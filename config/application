@@ -1,7 +1,7 @@
 # You will not normally need to modify this file.
 from wubwubwub import config
 import pwd, grp
-from twisted.application import strports
+from twisted.application import strports, service
 
 # Calculate user-id and group-id from names
 config.application.uid = pwd.getpwnam(config.username)[2]
