@@ -1,3 +1,11 @@
+wubwubwub (0.2) unstable; urgency=low
+
+  * Vhost-specific log file support.
+  * Add access log rotation support.
+  * Modernize examples: config reorganization, bugfixes, cleanups.
+
+ -- Tommi Virtanen <tv@debian.org>  Tue, 15 Mar 2005 13:17:14 +0200
+
 wubwubwub (0.1) unstable; urgency=low
 
   * Great config reorganization. Instead of assuming things are in default
