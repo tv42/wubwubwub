@@ -1,0 +1,79 @@
+#!/usr/bin/python2.2
+
+import os, sys
+from twisted.python import usage
+
+class Options(usage.Options):
+
+    optParameters = [
+                     ['port', 'p', 8384, 'The new port for Twisted Web to use'],
+                     ['vhost', 'v', None, 'The virtual host name'],
+                     ['apache-port', 'c', 80, 'Port apache is running on'],
+                    ]
+
+    optFlags = [
+                ['apache', 'a', 'Add appropriate configuration to apache'],
+                ['force', 'f', 'Overwrite existing configuration files']
+               ]
+
+
+header='''\
+####
+#### Automatically added by ...
+####
+'''
+
+file02addvhost='''\
+from twisted.web import vhost
+root.default.putChild('vhost', vhost.VHostMonsterResource())
+'''
+
+file50changeport='''\
+for i in range(len(application.tcpPorts)):
+    if application.tcpPorts[i][0] == 80:
+        del application.tcpPorts[i]
+        break
+
+application.listenTCP(%(port)s, site)
+'''
+
+apacheConfig='''\
+<VirtualHost *>
+ProxyPass / http://localhost:%(port)s/vhost/http/%(vhost)s:%(apache-port)s/
+ServerName %(vhost)s
+ServerAdmin webmaster@%(vhost)s
+</VirtualHost>
+'''
+
+def writeFile(name, content, force):
+    if not force and os.path.exists(name):
+         print "warning: %s exists, not touching"
+         return
+    fp = open(name+'-')
+    fp.write(header)
+    fp.write(content)
+    fp.close()
+    os.rename(name+'-', name)
+
+
+def main():
+    opt = Options()
+    try:
+        opt.parseOptions()
+    except usage.UsageError:
+        sys.exit("%s: wrong usage. use --help for help" % 
+	         os.path.basename(sys.argv[0]))
+    writeFile('/etc/twisted-web/02addvhost.py', file02addvhost, opt['force'])
+    writeFile('/etc/twisted-web/50changeport.py', file50changeport % opt,
+              opt['force'])
+    if opt['apache']:
+        if not os.path.exists('/etc/apache2/mods-enabled/proxy.load'):
+            os.system('a2enmod proxy')
+        writeFile('/etc/apache2/sites-available/%(vhost)s-%(apache-port)s'%opt,
+                  apacheConfig % opt, opt['force'])
+        # ????
+        # What should I write to
+        # /var/lib/vhost-base/%(vhost)s/conf/apache2.conf ? Anything?
+    os.system('invoke-rc.d twisted-web restart')
+    if opt['apache']:
+        os.system('invoke-rc.d apache2 graceful')
