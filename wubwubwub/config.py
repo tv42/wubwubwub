@@ -8,3 +8,7 @@ groupname = 'www-data'
 
 # The root of the HTTP hierarchy
 default = static.File('/var/www')
+
+# Make sure it is easy to add new virtual hosts:
+root = vhost.NameVirtualHost()
+root.default = default

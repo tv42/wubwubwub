@@ -1,16 +1,12 @@
 from wubwubwub import config
 from nevow import vhost
 
-# Make sure it is easy to add new virtual hosts:
-root = vhost.NameVirtualHost()
-root.default = config.default
-
 # To add virtual hosts
 #
 # exampleRoot = static.File('/var/vhosts/example')
-# root.addHost('example.com', exampleRoot)
+# config.root.addHost('example.com', exampleRoot)
 
 # Add a rule to rewrite /~foo/bar.html to /usrs/foo/bar.html
 # so that the classical user URLs will work.
 #from twisted.web import rewrite
-#root.default = rewrite.RewriterResource(root.default, rewrite.tildeToUsers)
+#config.root.default = rewrite.RewriterResource(config.root.default, rewrite.tildeToUsers)

@@ -1,4 +1,4 @@
-from wubwubwub import vhost
+from wubwubwub import config, vhost
 
 # This is the *Apache compatible* log file, not the twisted-style logfile.
 # Leaving this as None will have no Apache compatible log file. Apache
@@ -9,4 +9,4 @@ logPath = '/var/log/wubwubwub/access.log'
 
 # Generate the Site factory. You will not normally
 # want to modify this line.
-site = vhost.VhostLoggingNevowSite(root, logPath=logPath)
+site = vhost.VhostLoggingNevowSite(config.root, logPath=logPath)
