@@ -1,5 +1,8 @@
 # For more information and general comments on editing this file
 # please refer to /usr/share/doc/twisted-web/README
+# Instead of editing this files, most changes can be done via adding
+# files to /etc/twisted-web/local.d
+# Refer to README for more details.
 # 
 from twisted.web import script, static, server, distrib, twcgi, vhost, rewrite
 from twisted.internet import app
