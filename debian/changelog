@@ -1,6 +1,7 @@
 twisted-web (0.26) unstable; urgency=low
 
   * Added twconfcheck, which checks configuration for errors
+  * Moved to deeper directory structure in source
 
  -- Moshe Zadka <moshez@debian.org>  Wed, 28 May 2003 20:02:48 +0300
 
