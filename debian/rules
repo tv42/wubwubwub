@@ -25,7 +25,7 @@ install-stamp: build-stamp
 	install -m 644 twisted-web debian/twisted-web/etc/twisted-web/
 	install -m 755 debian/init.d debian/twisted-web/etc/init.d/twisted-web
 	install -m 644 debian/default debian/twisted-web/etc/default/twisted-web
-	install -m 644 debian/copyright debian/README.Debian \
+	install -m 644 debian/copyright README.mod_proxy debian/README.Debian \
                    debian/twisted-web/usr/share/doc/twisted-web/
 	install -d debian/twisted-web/usr/share/doc/twisted-web/examples/
 	install -m 644 examples/*.py \

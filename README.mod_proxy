@@ -1,0 +1,16 @@
+If you want Twisted-Web running under Apache's mod_proxy or a similar
+reverse proxy configuration, take the following steps:
+
+cp /usr/share/doc/twisted-web/examples/02vhostmonster.py \
+   /etc/twisted-web/local.d
+
+Edit /etc/twisted-web/twisted-web, and change the port "80" to something else
+
+Put in Apache's config something like:
+
+=========
+<VirtualHost ip-addr>
+ProxyPass / http://localhost:8538/vhost/http/example.com:80/
+ServerName example.com
+</VirtualHost>
+==========
