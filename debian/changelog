@@ -1,8 +1,16 @@
-wubwubwub (0.2.svn.1) unstable; urgency=low
+wubwubwub (0.3) unstable; urgency=low
 
-  * TODO
+  * Don't call trial, we have no unit tests anyway.
+  * Stop using lore, prettification of a single file is not worth the
+    build-dep.
+  * (Build-)depend on twisted-core >=2.2, twisted-web >= 0.5, and
+    nevow >= 0.6.
+  * Adjust to twisted API change on setting uid and gid.
+  * Prefer nevow.static over twisted.web.static.
+  * Upgrade to standards version 3.6.2.
+  * Update po-debconf i18n.
 
- -- Tommi Virtanen <tv@debian.org>  Sun, 20 Nov 2005 22:22:36 +0200
+ -- Tommi Virtanen <tv@debian.org>  Tue,  7 Mar 2006 18:15:55 +0200
 
 wubwubwub (0.2) unstable; urgency=low
 
