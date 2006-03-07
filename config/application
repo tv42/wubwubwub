@@ -4,8 +4,9 @@ import pwd, grp
 from twisted.application import strports, service
 
 # Calculate user-id and group-id from names
-config.application.uid = pwd.getpwnam(config.username)[2]
-config.application.gid = grp.getgrnam(config.groupname)[2]
+proc = service.IProcess(config.application)
+proc.uid = pwd.getpwnam(config.username)[2]
+proc.gid = grp.getgrnam(config.groupname)[2]
 
 # Listen on all ports specified:
 for line in open("/etc/wubwubwub/ports"):
