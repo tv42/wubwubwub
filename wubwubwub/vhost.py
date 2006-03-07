@@ -1,6 +1,6 @@
 import os, re
 from twisted.internet import defer
-from twisted.protocols import http
+from twisted.web import http
 from nevow import appserver
 
 class VhostLoggingNevowSite(appserver.NevowSite):
