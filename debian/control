@@ -2,7 +2,7 @@ Source: wubwubwub
 Section: net
 Priority: extra
 Maintainer: Tommi Virtanen <tv@debian.org>
-Build-Depends-Indep: python-dev, cdbs, debhelper (>= 4.1.68), python2.3-twisted, po-debconf, lynx
+Build-Depends-Indep: python-dev, cdbs, debhelper (>= 4.1.68), po-debconf, lynx
 Standards-Version: 3.5.7
 
 Package: wubwubwub

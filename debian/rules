@@ -8,12 +8,11 @@ DEB_DH_ALWAYS_EXCLUDE := .svn
 DEB_PYTHON_COMPILE_VERSION := 2.3
 
 build/wubwubwub::
-	lore --null --inputext=.html --config ext=.xhtml
-	lynx -force_html -dump -nolist README.xhtml > README 
+	lynx -force_html -dump -nolist README.html > README
 
 install/wubwubwub::
 	touch 'debian/wubwubwub/usr/share/wubwubwub/package-installed'
 	chgrp -R www-data debian/wubwubwub/var/log/wubwubwub
 
 clean::
-	rm -f README.xhtml README
+	rm -f README
