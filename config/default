@@ -1,5 +1,6 @@
 from wubwubwub import config
-from twisted.web import script, static, distrib, twcgi
+from nevow import static
+from twisted.web import script, distrib, twcgi
 
 # The default processors in Twisted, by file extension.
 # These make some file extensions not being sent to the user,

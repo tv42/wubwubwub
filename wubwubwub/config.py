@@ -1,7 +1,6 @@
 """WubWubWub configuration defaults."""
-from twisted.web import static
 from twisted.application import service
-from nevow import vhost
+from nevow import static, vhost
 from wubwubwub.vhost import VhostLoggingNevowSite
 
 # Set user/group to run under
