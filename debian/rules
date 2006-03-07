@@ -11,13 +11,9 @@ build/wubwubwub::
 	lore --null --inputext=.html --config ext=.xhtml
 	lynx -force_html -dump -nolist README.xhtml > README 
 
-common-post-build-indep::
-	PYTHONPATH=build/lib trial -R wubwubwub
-
 install/wubwubwub::
 	touch 'debian/wubwubwub/usr/share/wubwubwub/package-installed'
 	chgrp -R www-data debian/wubwubwub/var/log/wubwubwub
 
 clean::
-	rm -rf _trial_temp
 	rm -f README.xhtml README
