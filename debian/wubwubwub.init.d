@@ -27,6 +27,7 @@ case "$1" in
     stop)
         echo -n "Stopping wubwubwub: twistd"
         start-stop-daemon --stop --quiet --pidfile $pidfile
+	# TODO race condition, removal of the pidfile causes ugly error
         while [ -f $pidfile ] && /bin/kill -0 `cat $pidfile`; do \
                  echo -n "."; \
         done
